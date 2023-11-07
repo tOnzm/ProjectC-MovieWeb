@@ -3,7 +3,7 @@
       <v-sheet class="mx-auto" max-width="100%" style="background: transparent">
         <div class="slide-group-title">
           <h1>แนะนำ</h1>
-          <viewmoreBtn />
+          <ViewMoreBtn/>
         </div>
         <v-slide-group class="pa-4 slide-group-thumnail" show-arrows>
           <v-slide-group-item v-for="item in movie" :key="item.thumbnail">
@@ -17,10 +17,8 @@
   </template>
   
   <script>
-import viewmoreBtn from '../Buttons/viewmoreBtn.vue';  
   export default {
     name: "RecommentMovie",
-    components: { viewmoreBtn},
   
     data: () => ({
       movie: [
