@@ -17,7 +17,7 @@
   </template>
   
   <script>
-import viewmoreBtn from '../buttons/viewMoreBtn/index.vue';  
+import viewMoreBtn from '../buttons/viewMoreBtn/index.vue';  
   export default {
     name: "RecommentMovie",
     components: { viewMoreBtn},

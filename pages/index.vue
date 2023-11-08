@@ -4,7 +4,7 @@
     <CarouselsImage />
     <RecommentCard />
     <br />
-    <BottomNavigation />
+    <bottomNav />
   </div>
 </template>
 

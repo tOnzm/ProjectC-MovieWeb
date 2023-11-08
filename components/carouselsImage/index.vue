@@ -105,6 +105,7 @@ export default {
   object-fit: cover;
   height: 100%;
 }
+
 .parallax-image {
   max-width: 100%;
   max-height: 100%;
@@ -156,14 +157,21 @@ export default {
   justify-content: space-between;
 }
 @media screen and(max-width: 600px) {
+  ::v-deep .v-carousel {
+    height: 500px;
+  }
   .parallax-image {
     width: 100%;
     height: 50px;
   }
   ::v-deep .v-parallax__content img {
-  object-fit: cover;
-  height: 50%;
-}
+    object-fit: cover;
+    height: 50%;
+  }
+  ::v-deep .v-parallax__content {
+    object-fit: cover;
+    height: 100%;
+  }
   .carousel-image {
     max-height: 100%;
     height: 200px;
