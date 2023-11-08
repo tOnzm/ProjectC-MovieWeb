@@ -4,7 +4,7 @@
   
   <script>
   export default {
-      name:'ViewMoreBtn'
+      name:'ViewAllButton'
   };
   </script>
   
