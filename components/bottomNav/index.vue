@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-navigation :elevation="0" color="#fff" grow class="bottom-nav">
+    <v-bottom-navigation :elevation="0" height="60" color="#fff" grow class="bottom-nav">
       <v-btn value="home" id="no-background-hover">
         <span>หน้าหลัก</span>
         <v-icon>mdi-home-variant</v-icon>
@@ -26,9 +26,15 @@
   <style lang="scss" scoped>
   .bottom-nav {
     position: fixed;
+    background-color: #121212;
+    border-top: 1px solid #ffffff20;
   }
   #no-background-hover::before {
     background-color: transparent !important;
+  }
+  span{
+    font-weight: 200;
+    padding: 2px;
   }
   @media screen and(min-width: 960px) {
     .bottom-nav {

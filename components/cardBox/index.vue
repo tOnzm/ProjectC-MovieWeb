@@ -1,7 +1,7 @@
 <template>
     <v-item-group selected-class="bg-primary">
       <v-container>
-        <v-row>
+        <v-row dense>
           <v-col v-for="item in cardLogo" :key="item.logo" cols="4" md="2" sm="4">
             <v-item v-slot="{ isSelected, selectedClass, toggle }">
               <v-card

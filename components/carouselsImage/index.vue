@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="logo-mobile"><img src="@/static/logo-d-plus.svg" alt="" /></div>
     <div>
       <v-carousel
         class="carousel-image"
@@ -44,13 +45,22 @@
               </div>
             </v-card-text>
 
-            <v-card-actions class="detail-button">
-              <watchBtn />
-              <addBtn />
+            <v-card-actions>
+              <v-row dense>
+                <v-col cols="9" md="10">
+                  <watchBtn
+                    :prepend-icon="'mdi-play'"
+                    :text="'รับชมเดี๋ยวนี้'"
+                  />
+                </v-col>
+                <v-col cols="1" md="2"
+                  ><watchBtn :prepend-icon="'mdi-plus'"
+                /></v-col>
+              </v-row>
             </v-card-actions>
           </v-card>
-          <div class="parallax-image">
-            <v-parallax><img :src="item.image" alt="" /> </v-parallax>
+          <div class="image-cover">
+            <img :src="item.image" alt="" />
           </div>
         </v-carousel-item>
       </v-carousel>
@@ -62,11 +72,10 @@
 <script>
 import cardBox from "../cardBox/index.vue";
 import watchBtn from "../buttons/watchBtn.vue";
-import addBtn from "../buttons/addBtn.vue";
 
 export default {
   name: "CarouselsImage",
-  components: { cardBox, addBtn, watchBtn },
+  components: { cardBox, watchBtn },
   data() {
     return {
       imageCover: [
@@ -97,24 +106,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .v-parallax__content {
-  padding: 0;
-  justify-content: flex-start;
-}
-::v-deep .v-parallax__content img {
-  object-fit: cover;
+.image-cover {
+  position: relative;
+  float: bottom;
   height: 100%;
+  width: 100%;
+}
+.image-cover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #12121200 0%, #121212 100%);
+  z-index: 1;
+}
+.image-cover img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
-.parallax-image {
-  max-width: 100%;
-  max-height: 100%;
-  padding: 0;
-}
-.carousel-image {
-  max-width: 100%;
-  max-height: 100%;
-}
 .movie-logo {
   width: 100%;
 }
@@ -152,29 +165,33 @@ export default {
   display: flex;
   column-gap: 0.75rem;
 }
-.detail-button {
-  display: flex;
-  justify-content: space-between;
+.logo-mobile {
+  display: none;
 }
 @media screen and(max-width: 600px) {
-  ::v-deep .v-carousel {
-    height: 500px;
-  }
-  .parallax-image {
+  .image-cover {
+    position: relative;
+    float: bottom;
+    height: 60%;
     width: 100%;
-    height: 50px;
   }
-  ::v-deep .v-parallax__content img {
-    object-fit: cover;
-    height: 50%;
+  .image-cover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, #12121200 0%, #121212 100%);
+    z-index: 1;
   }
-  ::v-deep .v-parallax__content {
-    object-fit: cover;
+  .image-cover img {
     height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
-  .carousel-image {
-    max-height: 100%;
-    height: 200px;
+  .v-carousel {
+    height: 350px !important;
   }
   .detail-box {
     display: flex;
@@ -188,8 +205,6 @@ export default {
     left: 0;
     background: transparent;
     z-index: 2;
-    background: #121212;
-    background: linear-gradient(0deg, #121212 60%, rgba(255, 255, 255, 0) 100%);
   }
   .movie-logo {
     width: 80%;
@@ -215,9 +230,14 @@ export default {
   .movie-type {
     display: none;
   }
-  .detail-button {
-    display: flex;
-    justify-content: center;
+  .logo-mobile {
+    display: block;
+    position: absolute;
+    z-index: 999;
+    margin: 1rem;
+  }
+  .logo-mobile img {
+    width: 45px;
   }
 }
 </style>

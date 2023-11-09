@@ -2,10 +2,13 @@
   <div>
     <MainSideBar/>
     <CarouselsImage />
-    <RecommentCard />
+    <RecommentCard title-menu="ติดเทรนในประเทศไทย"/>
+    <RecommentCard title-menu="มาใหม่"/>
+    <RecommentCard title-menu="ดิสนีย์พลัส ออลิจินัลส์"/>
     <br />
     <bottomNav />
   </div>
+  
 </template>
 
 <script>

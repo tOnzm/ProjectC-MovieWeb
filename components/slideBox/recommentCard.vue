@@ -1,94 +1,117 @@
 <template>
-    <div>
-      <v-sheet class="mx-auto" max-width="100%" style="background: transparent">
-        <div class="slide-group-title">
-          <h1>แนะนำ</h1>
-          <viewMoreBtn/>
-        </div>
-        <v-slide-group class="pa-4 slide-group-thumnail" show-arrows>
-          <v-slide-group-item v-for="item in movie" :key="item.thumbnail">
-            <v-card class="mx-1 thumbnail-movie">
-              <v-img class="align-center" :src="item.thumbnail"> </v-img>
-            </v-card>
-          </v-slide-group-item>
-        </v-slide-group>
-      </v-sheet>
-    </div>
-  </template>
-  
-  <script>
-import viewMoreBtn from '../buttons/viewMoreBtn/index.vue';  
-  export default {
-    name: "RecommentMovie",
-    components: { viewMoreBtn},
-  
-    data: () => ({
-      movie: [
-        {
-          thumbnail: require("/static/movieImg/thumbnail/ahsoka.webp"),
-        },
-        {
-          thumbnail: require("/static/movieImg/thumbnail/haunting.webp"),
-        },
-        {
-          thumbnail: require("/static/movieImg/thumbnail/kevenant.webp"),
-        },
-        {
-          thumbnail: require("/static/movieImg/thumbnail/legoa.webp"),
-        },
-        {
-          thumbnail: require("/static/movieImg/thumbnail/loki.webp"),
-        },
-        {
-          thumbnail: require("/static/movieImg/thumbnail/mickey.webp"),
-        },
-        {
-          thumbnail: require("/static/movieImg/thumbnail/myhomehero.webp"),
-        },
-        {
-          thumbnail: require("/static/movieImg/thumbnail/santa.webp"),
-        },
-        {
-          thumbnail: require("/static/movieImg/thumbnail/the1st.webp"),
-        },
-        {
-          thumbnail: require("/static/movieImg/thumbnail/tokyo.webp"),
-        },
-      ],
-    }),
-  };
-  </script>
-  
-  <style lang="scss" scoped>
+  <div>
+    <v-sheet class="mx-auto" max-width="100%" style="background: transparent">
+      <div class="slide-group-title">
+        <h1>{{titleMenu}}</h1>
+        <viewMoreBtn />
+      </div>
+      <v-slide-group show-arrows center-active mobile-breakpoint="sm">
+        <v-slide-group-item v-for="item in randomList(movie)" :key="item.thumbnail">
+          <v-card class="mx-1 thumbnail-movie">
+            <v-img class="align-center" :src="item.thumbnail"> </v-img>
+          </v-card>
+        </v-slide-group-item>
+      </v-slide-group>
+    </v-sheet>
+  </div>
+</template>
+
+<script>
+import viewMoreBtn from "../buttons/viewMoreBtn/index.vue";
+export default {
+  name: "RecommentMovie",
+  components: { viewMoreBtn },
+  props: {
+    titleMenu: String
+  },
+
+  data: () => ({
+    movie: [
+      {
+        thumbnail: require("/static/movieImg/thumbnail/ahsoka.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/haunting.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/kevenant.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/legoa.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/loki.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/mickey.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/myhomehero.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/santa.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/the1st.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/tokyo.webp"),
+      },
+    ],
+  }),
+  methods: {
+    randomList: function (rand) {
+      return rand.sort(function () {
+        return 0.5 - Math.random();
+      });
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.thumbnail-movie {
+  display: flex;
+  width: 180px;
+  height: 240px;
+  transition: transform 0.5s;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.thumbnail-movie img {
+  object-fit: cover;
+}
+.thumbnail-movie:hover {
+  transform: scale(0.9);
+  z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.slide-group-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2% 5% 2% 5%;
+}
+.slide-group-title h1 {
+  font-size: 1.5rem;
+}
+
+
+@media screen and(max-width: 600px) {
   .thumbnail-movie {
-    display: flex;
-    width: 180px;
-    height: 240px;
-    transition: transform 0.5s;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    overflow: visible;
-    contain: none;
-  }
-  .thumbnail-movie img {
-    object-fit: cover;
-  }
-  .thumbnail-movie:hover {
-    transform: perspective(1000px) translateY(-5%) rotateX(25deg) translateZ(0);
-    box-shadow: #ffffff40 0px 5px, #ffffff30 0px 10px, #ffffff20 0px 15px,
-      #ffffff10 0px 20px, #ffffff05 0px 25px;
-  }
-  .slide-group-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 5% 0 5%;
-  }
-  @media screen and(max-width: 600px) {
-    .thumbnail-movie {
-   
     width: 120px;
     height: 160px;
   }
+  .slide-group-title h1 {
+    font-size: 1rem;
   }
-  </style>
-  
+
+  ::v-deep .v-slide-group__next {
+    display: none;
+  }
+  ::v-deep .v-slide-group__prev {
+    display: none;
+  }
+}
+</style>
