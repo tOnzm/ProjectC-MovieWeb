@@ -36,7 +36,7 @@
     font-weight: 200;
     padding: 2px;
   }
-  @media screen and(min-width: 960px) {
+  @media screen and(min-width: 1280px) {
     .bottom-nav {
       display: none;
     }

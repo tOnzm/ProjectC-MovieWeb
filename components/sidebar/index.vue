@@ -7,7 +7,7 @@
       width="500"
       floating
       expand-on-hover
-      mini-variant-width="150"
+      mini-variant-width="75"
     >
       <div class="Logo">
         <img src="@/static/logo-d-plus.svg" />
@@ -50,8 +50,8 @@ export default {
         },
         {
           icon: "mdi-magnify",
-          title: "Loop Page",
-          to: "/",
+          title: "Marvel Movie",
+          to: "/studio/marvel",
         },
         {
           icon: "mdi-home-variant",
@@ -128,7 +128,7 @@ export default {
   margin-top: 2rem;
   margin: 1rem;
 }
-@media screen and(max-width: 960px) {
+@media screen and(max-width: 600px) {
   .custom-drawer {
     display: none;
   }

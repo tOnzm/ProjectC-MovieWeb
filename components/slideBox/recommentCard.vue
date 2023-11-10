@@ -2,11 +2,14 @@
   <div>
     <v-sheet class="mx-auto" max-width="100%" style="background: transparent">
       <div class="slide-group-title">
-        <h1>{{titleMenu}}</h1>
+        <h1>{{ titleMenu }}</h1>
         <viewMoreBtn />
       </div>
       <v-slide-group show-arrows center-active mobile-breakpoint="sm">
-        <v-slide-group-item v-for="item in randomList(movie)" :key="item.thumbnail">
+        <v-slide-group-item
+          v-for="item in randomList(movie)"
+          :key="item.thumbnail"
+        >
           <v-card class="mx-1 thumbnail-movie">
             <v-img class="align-center" :src="item.thumbnail"> </v-img>
           </v-card>
@@ -22,7 +25,7 @@ export default {
   name: "RecommentMovie",
   components: { viewMoreBtn },
   props: {
-    titleMenu: String
+    titleMenu: String,
   },
 
   data: () => ({
@@ -92,11 +95,27 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin: 2% 5% 2% 5%;
+  z-index: 2;
 }
 .slide-group-title h1 {
   font-size: 1.5rem;
+  margin-left: 3vw;
+}
+::v-deep .v-slide-group__next,
+::v-deep .v-slide-group__prev {
+  display: flex; 
+  min-width: 20px;
+}
+::v-deep .v-slide-group__next:hover,
+::v-deep .v-slide-group__prev:hover {
+ display: flex;
+ background-color: #ffffff10;
 }
 
+
+.v-slide-group {
+  margin-left: 5vw;
+}
 
 @media screen and(max-width: 600px) {
   .thumbnail-movie {
@@ -105,11 +124,10 @@ export default {
   }
   .slide-group-title h1 {
     font-size: 1rem;
+    margin-left: 0;
   }
 
-  ::v-deep .v-slide-group__next {
-    display: none;
-  }
+  ::v-deep .v-slide-group__next,
   ::v-deep .v-slide-group__prev {
     display: none;
   }
