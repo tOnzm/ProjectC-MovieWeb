@@ -51,28 +51,28 @@ export default {
         {
           icon: "mdi-magnify",
           title: "Loop Page",
-          to: "/loop",
+          to: "/",
         },
         {
           icon: "mdi-home-variant",
 
           title: "Movie",
-          to: "/movie",
+          to: "/",
         },
         {
           icon: "mdi-television-classic",
           title: "Series",
-          to: "/product",
+          to: "/",
         },
         {
           icon: "mdi-movie-open",
           title: "Movie",
-          to: "/product",
+          to: "/",
         },
         {
           icon: "mdi-star-four-points",
           title: "Originals",
-          to: "/product",
+          to: "/",
         },
       ],
       miniVariant: false,
