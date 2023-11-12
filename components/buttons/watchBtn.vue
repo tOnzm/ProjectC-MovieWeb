@@ -1,8 +1,8 @@
 <template>
   <div class="button-custom">
-    <v-btn block size="x-large">
-      <v-icon>{{ prependIcon }} </v-icon>
-      {{ text }}
+    <v-btn block size="x-large" :color="color">
+      <v-icon :color="iconColor">{{ prependIcon }} </v-icon>
+      <span :style="{ color: textColor }">{{ text }}</span>
     </v-btn>
   </div>
 </template>
@@ -13,6 +13,9 @@ export default {
   props: {
     text: String,
     prependIcon: String,
+    color: String,
+    iconColor: String,
+    textColor: String,
   },
 };
 </script>

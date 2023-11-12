@@ -10,9 +10,11 @@
           v-for="item in randomList(movie)"
           :key="item.thumbnail"
         >
-          <v-card class="mx-1 thumbnail-movie">
-            <v-img class="align-center" :src="item.thumbnail"> </v-img>
-          </v-card>
+          <NuxtLink to="/movie"
+            ><v-card class="mx-1 thumbnail-movie">
+              <v-img class="align-center" :src="item.thumbnail">
+              </v-img> </v-card
+          ></NuxtLink>
         </v-slide-group-item>
       </v-slide-group>
     </v-sheet>
@@ -21,9 +23,10 @@
 
 <script>
 import viewMoreBtn from "../buttons/viewMoreBtn/index.vue";
+import MiniCard from "/components/miniCard/index";
 export default {
   name: "RecommentMovie",
-  components: { viewMoreBtn },
+  components: { viewMoreBtn, MiniCard },
   props: {
     titleMenu: String,
   },
@@ -103,15 +106,14 @@ export default {
 }
 ::v-deep .v-slide-group__next,
 ::v-deep .v-slide-group__prev {
-  display: flex; 
+  display: flex;
   min-width: 20px;
 }
 ::v-deep .v-slide-group__next:hover,
 ::v-deep .v-slide-group__prev:hover {
- display: flex;
- background-color: #ffffff10;
+  display: flex;
+  background-color: #ffffff10;
 }
-
 
 .v-slide-group {
   margin-left: 5vw;

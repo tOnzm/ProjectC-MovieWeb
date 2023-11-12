@@ -39,45 +39,41 @@ export default {
   name: "MainSideBar",
   data() {
     return {
-      clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       items: [
         {
           icon: "mdi-account-circle",
-          title: "Home Page",
+          title: "โปรไฟล์ของฉัน",
           to: "/",
         },
         {
           icon: "mdi-magnify",
-          title: "Marvel Movie",
-          to: "/studio/marvel",
+          title: "ค้นหา",
+          to: "/",
         },
         {
           icon: "mdi-home-variant",
-
-          title: "Movie",
+          title: "หน้าแรก",
           to: "/",
         },
         {
           icon: "mdi-television-classic",
-          title: "Series",
+          title: "ซีรีส์",
           to: "/",
         },
         {
           icon: "mdi-movie-open",
-          title: "Movie",
+          title: "ภาพยนตร์",
           to: "/",
         },
         {
           icon: "mdi-star-four-points",
-          title: "Originals",
+          title: "ออริจินัล",
           to: "/",
         },
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
+      miniVariant: true,
       title: "Vuetify.js",
     };
   },
@@ -85,22 +81,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.custom-drawer-mini {
-  display: none;
+::v-deep .v-navigation-drawer__content{
+  display: grid;
 }
 .custom-drawer {
   background: linear-gradient(
     90deg,
-    rgba(15, 16, 20, 1) 10%,
+    rgba(15, 16, 20, 1) 20%,
     rgba(15, 16, 20, 0) 100%
   );
   display: flex;
   justify-content: space-between;
-  column-gap: 2rem;
+  will-change: initial;
 }
 .Sidebar {
   display: flex;
-  justify-items: flex-start;
+  justify-content: flex-start;
   margin: 1rem;
 }
 .Navbar {
@@ -112,6 +108,7 @@ export default {
   color: transparent;
   background: transparent;
   transition: transform 0.3s;
+ 
 }
 .List:hover {
   background-color: transparent;
@@ -125,8 +122,11 @@ export default {
 }
 
 .Logo {
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin: 1rem;
+}
+.Logo img{
+  margin-top: 2rem;
 }
 @media screen and(max-width: 600px) {
   .custom-drawer {
