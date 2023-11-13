@@ -1,38 +1,31 @@
 <template>
   <div>
-    <v-sheet class="mx-auto" max-width="100%" style="background: transparent">
-      <div class="slide-group-title">
-        <h1>{{ titleMenu }}</h1>
-        <viewMoreBtn />
-      </div>
-      <v-slide-group show-arrows center-active mobile-breakpoint="sm">
-        <v-slide-group-item
-          v-for="item in randomList(movie)"
-          :key="item.thumbnail"
-        >
-          <NuxtLink to="/movie"
-            ><v-card class="mx-1 thumbnail-movie">
-              <v-img class="align-center" :src="item.thumbnail">
-              </v-img> </v-card
-          ></NuxtLink>
-        </v-slide-group-item>
-      </v-slide-group>
-    </v-sheet>
+    <div class="slide-group-title">
+      <h1>{{ titleText }}</h1>
+      <viewMoreBtn />
+    </div>
+    <v-slide-group show-arrows center-active>
+      <v-slide-group-item 
+      v-for="item in randomList(thumbnail)" :key="item.thumbnail">
+        <NuxtLink to="/movie"
+          ><v-card class="mx-1 thumbnail-movie">
+            <v-img class="align-center" :src="item.thumbnail"> </v-img> </v-card
+        ></NuxtLink>
+      </v-slide-group-item>
+    </v-slide-group>
   </div>
 </template>
 
 <script>
 import viewMoreBtn from "../buttons/viewMoreBtn/index.vue";
-import MiniCard from "/components/miniCard/index";
 export default {
   name: "RecommentMovie",
-  components: { viewMoreBtn, MiniCard },
+  components: { viewMoreBtn },
   props: {
-    titleMenu: String,
+    titleText: String,
   },
-
   data: () => ({
-    movie: [
+    thumbnail: [
       {
         thumbnail: require("/static/movieImg/thumbnail/ahsoka.webp"),
       },
@@ -63,11 +56,18 @@ export default {
       {
         thumbnail: require("/static/movieImg/thumbnail/tokyo.webp"),
       },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/capmarvel.webp"),
+      },
+      {
+        thumbnail: require("/static/movieImg/thumbnail/vandavision.webp"),
+      },
     ],
   }),
+
   methods: {
-    randomList: function (rand) {
-      return rand.sort(function () {
+    randomList: function (random) {
+      return random.sort(function () {
         return 0.5 - Math.random();
       });
     },
@@ -76,6 +76,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+//ชื่อหัวข้อ 
+.slide-group-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 3rem;
+  z-index: 2;
+}
+.slide-group-title h1 {
+  font-size: 1.5rem;
+  margin-left: 6rem;
+}
+
 .thumbnail-movie {
   display: flex;
   width: 180px;
@@ -93,17 +107,7 @@ export default {
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-.slide-group-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 2% 5% 2% 5%;
-  z-index: 2;
-}
-.slide-group-title h1 {
-  font-size: 1.5rem;
-  margin-left: 3vw;
-}
+
 ::v-deep .v-slide-group__next,
 ::v-deep .v-slide-group__prev {
   display: flex;
@@ -114,10 +118,10 @@ export default {
   display: flex;
   background-color: #ffffff10;
 }
-
 .v-slide-group {
   margin-left: 5vw;
 }
+
 
 @media screen and(max-width: 600px) {
   .thumbnail-movie {
