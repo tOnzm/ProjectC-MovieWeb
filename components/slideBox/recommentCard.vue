@@ -9,7 +9,7 @@
         v-for="item in randomList(thumbnail)"
         :key="item.thumbnail"
       >
-        <NuxtLink to="/movie">
+        <NuxtLink :to="`/movie/${item.name}`">
           <v-card class="mx-1 thumbnail-movie">
             <v-img class="align-center" :src="item.thumbnail"> </v-img>
           </v-card>
@@ -31,39 +31,51 @@ export default {
     thumbnail: [
       {
         thumbnail: require("/static/movieImg/thumbnail/ahsoka.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/haunting.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/kevenant.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/legoa.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/loki.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/mickey.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/myhomehero.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/santa.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/the1st.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/tokyo.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/capmarvel.webp"),
+        name: 'ahsoka'
       },
       {
         thumbnail: require("/static/movieImg/thumbnail/vandavision.webp"),
+        name: 'ahsoka'
       },
     ],
   }),

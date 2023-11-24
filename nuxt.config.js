@@ -5,7 +5,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - ProjectC',
-    title: 'ProjectC',
+    title: 'Disney+ hotstar',
     htmlAttrs: {
       lang: 'en'
     },
