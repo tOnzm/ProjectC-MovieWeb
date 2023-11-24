@@ -2,9 +2,11 @@
   <div>
     <MainSideBar />
     <CarouselsImage />
-    <RecommentCard  title-text="ติดเทรนในประเทศไทย"/>
-    <RecommentCard  title-text="มาใหม่"/>
-    <RecommentCard  title-text="แนะนำสำหรับคุณ"/>
+
+
+    <RecommentCard title-text="ติดเทรนในประเทศไทย" />
+    <RecommentCard title-text="มาใหม่" />
+    <RecommentCard title-text="แนะนำสำหรับคุณ" />
     <br />
     <bottomNav />
   </div>
@@ -15,7 +17,7 @@ import RecommentCard from "../components/slideBox/recommentCard.vue";
 import MainSideBar from "../components/sidebar/index.vue";
 export default {
   name: "IndexPage",
-  components: { RecommentCard, MainSideBar},
+  components: { RecommentCard, MainSideBar },
   data: () => ({
     thumbnail: [
       {
@@ -53,4 +55,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

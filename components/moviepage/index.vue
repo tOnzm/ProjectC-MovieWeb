@@ -75,16 +75,16 @@
     <v-container>
       <div class="title-season">
         <v-row>
-          <v-col md="1"
-            ><v-btn text class="px-10" plain x-large><h2>ตอน</h2></v-btn></v-col
+          <v-col md="2"
+            ><v-btn text plain x-large><h2>ตอน</h2></v-btn></v-col
           >
 
-          <v-col md="2"
-            ><v-btn text class="px-10" x-large plain><h2>ตัวอย่างและอื่นๆ</h2></v-btn></v-col
+          <v-col md="3"
+            ><v-btn text x-large plain><h2>ตัวอย่างและอื่นๆ</h2></v-btn></v-col
           >
-          
-          <v-col md="2"
-            ><v-btn text class="px-10" x-large plain><h2>แนวคล้ายกัน</h2></v-btn></v-col
+
+          <v-col md="3"
+            ><v-btn text x-large plain><h2>แนวคล้ายกัน</h2></v-btn></v-col
           >
         </v-row>
         <v-divider class="my-5"></v-divider>

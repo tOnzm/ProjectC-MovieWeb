@@ -1,17 +1,15 @@
 <template>
   <div>
     <MainSideBar />
-    <moviepage/>
+    <moviepage />
   </div>
 </template>
 
 <script>
-import MainSideBar from '/components/sidebar/index'
+import MainSideBar from "/components/sidebar/index";
 export default {
-  name: " Disney",
-  components: { MainSideBar }
-
-
+  name: " Marvel",
+  components: { MainSideBar },
 };
 </script>
 

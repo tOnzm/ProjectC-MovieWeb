@@ -5,12 +5,15 @@
       <viewMoreBtn />
     </div>
     <v-slide-group show-arrows center-active>
-      <v-slide-group-item 
-      v-for="item in randomList(thumbnail)" :key="item.thumbnail">
-        <NuxtLink to="/movie"
-          ><v-card class="mx-1 thumbnail-movie">
-            <v-img class="align-center" :src="item.thumbnail"> </v-img> </v-card
-        ></NuxtLink>
+      <v-slide-group-item
+        v-for="item in randomList(thumbnail)"
+        :key="item.thumbnail"
+      >
+        <NuxtLink to="/movie">
+          <v-card class="mx-1 thumbnail-movie">
+            <v-img class="align-center" :src="item.thumbnail"> </v-img>
+          </v-card>
+        </NuxtLink>
       </v-slide-group-item>
     </v-slide-group>
   </div>
@@ -68,7 +71,7 @@ export default {
   methods: {
     randomList: function (random) {
       return random.sort(function () {
-        return 0.5 - Math.random();
+        return Math.random() * 2 - 1;
       });
     },
   },
@@ -76,8 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-//ชื่อหัวข้อ 
+//ชื่อหัวข้อ
 .slide-group-title {
   display: flex;
   justify-content: space-between;
@@ -121,7 +123,6 @@ export default {
 .v-slide-group {
   margin-left: 5vw;
 }
-
 
 @media screen and(max-width: 600px) {
   .thumbnail-movie {
