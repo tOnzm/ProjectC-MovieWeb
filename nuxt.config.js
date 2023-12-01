@@ -1,6 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 
+
 export default {
+ 
   
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -38,8 +40,9 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
+  modules: ['@nuxtjs/axios'
   ],
+  axios: {},
   
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

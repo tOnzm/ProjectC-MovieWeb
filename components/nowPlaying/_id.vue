@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <h1>{{ movie.original_title }}</h1>
-    <img :src="getImageUrl(movie.poster_path)" :alt="movie.original_title" />
-    <p>{{ movie.overview }}</p>
-  </div>
+    <div>
+<h1>{{ movie.original_title }}</h1>
+    </div>
 </template>
 
 <script>
@@ -29,17 +27,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.photo-info {
-  width: 860px;
-  margin: 0 auto;
-  text-align: center;
-}
-.img {
-  width: 200px;
-}
 
-.link {
-  display: inline-block;
-  margin-top: 2em;
-}
 </style>

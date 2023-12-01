@@ -1,33 +1,22 @@
 <template>
   <div>
-    <MainSideBar />
-    <CarouselsImage />
-
-    <nowPlaying title-text="มาแรงในขณะนี้">
-      <v-slide-group-item v-for="item in nowPlayings" :key="item.id">
-        <NuxtLink :to="`/${item.id}`">
+<nowPlaying title-text="มาแรง">
+    <v-slide-group-item v-for="item in nowPlayings" :key="item.id">
+        <NuxtLink :to="getMoviePath(item)">
           <v-card class="mx-1 thumbnail-movie">
             <v-img class="align-center" :src="getImageUrl(item.poster_path)">
             </v-img>
           </v-card>
         </NuxtLink>
       </v-slide-group-item>
-    </nowPlaying>
-
-    <br />
-    <bottomNav />
-  </div>
+</nowPlaying>
+</div>
 </template>
 
 <script>
 import nowPlaying from "../components/nowPlaying/index.vue";
-import MainSideBar from "../components/sidebar/index.vue";
 export default {
-  name: "IndexPage",
-  components: { nowPlaying, MainSideBar },
-  head: {
-    title: " หน้าแรก",
-  },
+  components: { nowPlaying },
   async asyncData({ $axios }) {
     try {
       const response = await $axios.$get(
@@ -46,14 +35,12 @@ export default {
       const baseImageUrl = "https://image.tmdb.org/t/p/w500/";
       return `${baseImageUrl}${posterPath}`;
     },
-
-    //ไม่แสดงผล
-    /* getMoviePath(item) {
+    getMoviePath(item) {
       return {
         name: "nowPlaying-id",
-        params: { id: movies.id },
+        params: { id: item.id },
       };
-    }, */
+    },
   },
 };
 </script>
