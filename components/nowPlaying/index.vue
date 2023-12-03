@@ -4,10 +4,14 @@
       <h1>{{ titleText }}</h1>
       <viewMoreBtn />
     </div>
-    <v-slide-group show-arrows center-active> 
-      <slot>
-        <!-- สไลด์ -->
-      </slot> 
+    <v-slide-group show-arrows center-active>
+      <v-slide-group-item v-for="item in nowPlayings" :key="item.id">
+        <NuxtLink :to="`/${item.id}`">
+          <v-card class="mx-1 thumbnail-movie">
+            <img class="align-center" :src="getImageUrl(item.poster_path)" />
+          </v-card>
+        </NuxtLink>
+      </v-slide-group-item>
     </v-slide-group>
   </div>
 </template>
@@ -15,7 +19,7 @@
 <script>
 import viewMoreBtn from "../buttons/viewMoreBtn/index.vue";
 export default {
-  name: "Hit",
+  name: "NowPlaying",
   components: { viewMoreBtn },
   props: {
     titleText: String,
@@ -25,30 +29,26 @@ export default {
       nowPlayings: [],
     };
   },
-  async asyncData({ $axios }) {
-    try {
-      const response = await $axios.$get(
-        "https://api.themoviedb.org/3/movie/now_playing?api_key=3c79a5d5b0c2bd68652652a202b1c175"
-      );
-
-      return { nowPlayings: response.results || [] };
-    } catch (error) {
-      console.error("Error fetching movie data", error);
-      return { nowPlayings: [] };
-    }
-  },
-
   methods: {
-    getImageUrl(posterPath) {
-      const baseImageUrl = "https://image.tmdb.org/t/p/w500/";
-      return `${baseImageUrl}${posterPath}`;
+    getImageUrl(imagePath) {
+      const baseImageUrl = "https://image.tmdb.org/t/p/original";
+      return `${baseImageUrl}${imagePath}`;
     },
-    getMoviePath(item) {
-      return {
-        name: "nowPlaying-id",
-        params: { id: item.id },
-      };
+   
+    async fetchSomething() {
+      try {
+        const nowPlayingResponse = await this.$axios.$get(
+          "https://api.themoviedb.org/3/movie/now_playing?api_key=3c79a5d5b0c2bd68652652a202b1c175"
+        );
+       
+        this.nowPlayings = nowPlayingResponse.results;
+      } catch (error) {
+        console.error("Error fetching top-rated movies:", error);
+      }
     },
+  },
+  mounted() {
+    this.fetchSomething();
   },
 };
 </script>
@@ -69,13 +69,14 @@ export default {
 
 .thumbnail-movie {
   display: flex;
-  width: 180px;
+  width: 160px;
   height: 240px;
   transition: transform 0.5s;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .thumbnail-movie img {
   object-fit: cover;
+  width: 100%;
 }
 .thumbnail-movie:hover {
   transform: scale(0.9);

@@ -1,9 +1,11 @@
 <template>
   <div>
+    <!-- โลโก้มุมซ้ายบน ขนาด Mobile-->
     <div class="logo-mobile"><img src="@/static/logo-d-plus.svg" alt="" /></div>
     <div>
       <v-carousel
         class="carousel-image"
+        height="70vh"
         hide-delimiters
         cycle
         show-arrows-on-hover
@@ -11,11 +13,14 @@
       >
         <v-carousel-item
           class="carousel-item"
-          v-for="item in imageCover"
+          v-for="item in topRatedMovies"
           :key="item.id"
         >
           <v-card class="detail-box" flat>
-            <v-img class="white--text align-center movie-logo" :src="item.logo">
+            <v-img
+              class="white--text align-center movie-logo"
+              :src="getImageUrl(item.backdrop_path)"
+            >
             </v-img>
             <v-card-text class="text--primary px-0">
               <div class="movie-detail">
@@ -31,17 +36,13 @@
               </div>
               <div class="movie-synopsis">
                 <h3>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
-                  possimus expedita animi quibusdam maxime voluptatum impedit,
-                  laboriosam nesciunt. Possimus adipisci dignissimos voluptate,
-                  labore quibusdam unde expedita dicta voluptatibus omnis
-                  veniam?
+                  {{ item.overview }}
                 </h3>
               </div>
               <div class="movie-type">
-                <h3>Action</h3>
-                <h3>|</h3>
-                <h3>Sci-fi</h3>
+                <span v-for="item2 in movies.genres" :key="item2.id">{{
+                  item2.name
+                }}</span>
               </div>
             </v-card-text>
 
@@ -60,7 +61,7 @@
             </v-card-actions>
           </v-card>
           <div class="image-cover">
-            <img :src="item.image" alt="" />
+            <img :src="getImageUrl(item.backdrop_path)" alt=" " />
           </div>
         </v-carousel-item>
       </v-carousel>
@@ -74,33 +75,33 @@ import cardBox from "../cardBox/index.vue";
 import watchBtn from "../buttons/watchBtn.vue";
 
 export default {
-  name: "CarouselsImage",
+  name: "carouselsImage",
   components: { cardBox, watchBtn },
   data() {
     return {
-      imageCover: [
-        {
-          id: 1,
-          image: require("/static/movieImg/cover/moving.webp"),
-          logo: require("/static/movieImg/logos/moving.webp"),
-        },
-        {
-          id: 2,
-          image: require("/static/movieImg/cover/starwarthelastjedi.webp"),
-          logo: require("/static/movieImg/logos/starwarthelastjedi.webp"),
-        },
-        {
-          id: 3,
-          image: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
-          logo: require("/static/movieImg/logos/thefirstresponders.webp"),
-        },
-        {
-          id: 4,
-          image: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
-          logo: require("/static/movieImg/logos/thefirstresponders.webp"),
-        },
-      ],
+      topRatedMovies: [],
+      logoMovies: [],
+      movies: [],
     };
+  },
+  methods: {
+    getImageUrl(imagePath) {
+      const baseImageUrl = "https://image.tmdb.org/t/p/original";
+      return `${baseImageUrl}${imagePath}`;
+    },
+
+    async fetchSomething() {
+      const topRatedResponse = await this.$axios.$get(
+        "https://api.themoviedb.org/3/movie/top_rated?api_key=3c79a5d5b0c2bd68652652a202b1c175"
+      );
+
+      this.topRatedMovies = topRatedResponse.results;
+
+      console.log(topRatedResponse.results);
+    },
+  },
+  mounted() {
+    this.fetchSomething();
   },
 };
 </script>
@@ -108,7 +109,6 @@ export default {
 <style lang="scss" scoped>
 .image-cover {
   position: relative;
-  float: bottom;
   height: 100%;
   width: 100%;
 }
@@ -123,7 +123,7 @@ export default {
   z-index: 1;
 }
 .image-cover img {
-  height: 100%;
+  height: auto;
   width: 100%;
   object-fit: cover;
 }

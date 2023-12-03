@@ -1,19 +1,10 @@
 <template>
-  <div>
-    <MainSideBar />
-
-    <moviepage />
-  </div>
+  <div>Movie Page</div>
 </template>
 
 <script>
-import MainSideBar from '../components/sidebar/index.vue'
-
-
 export default {
   name: " MoviePage",
-  components: { MainSideBar }
-
 };
 </script>
 

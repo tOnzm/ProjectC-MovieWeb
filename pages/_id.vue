@@ -5,89 +5,85 @@
       <img src="../static/logo-d-plus.svg" alt="" />
     </div>
     <div>
-      <v-carousel
-        class="carousel-image"
-        hide-delimiters
-        cycle
-        show-arrows-on-hover
-        :show-arrows="false"
-      >
-        <v-carousel-item class="carousel-item">
-          <v-card class="detail-box" flat>
-            <!--  <div>
-              <img
-                class="white--text align-center movie-logo"
-                :src="getImageUrl(movie.logos)"
-              />
-              <img />
-            </div> -->
-            <div class="movie-title">
-              <h1>{{ movie.title }}</h1>
-              <p>{{ movie.original_title }}</p>
-            </div>
-            <v-card-text class="text--primary px-0">
-              <div class="movie-detail">
-                <h3>{{ movie.release_date.substring(0, 4) }}</h3>
-                <v-icon>mdi-circle-small</v-icon>
-                <h3>{{ movie.runtime }} นาที</h3>
-                <v-icon>mdi-circle-small</v-icon>
-                <div class="language">
-                  <span
-                    v-for="language in movie.spoken_languages"
-                    :key="language.iso_639_1"
-                  >
-                    {{ language.name }}
-                  </span>
-                </div>
+      <v-card class="detail-box" flat>
+        <!-- โลโก้หนัง -->
 
-                <!-- เรทอายุ -->
-                   <v-icon>mdi-circle-small</v-icon>
-                <div class="movie-rate" >
-                  <h3>{{movie.certification}}</h3>
-                </div> 
-              </div>
-              <div class="movie-overview">
-                <h3>
-                  {{ movie.overview }}
-                </h3>
-              </div>
-              <div class="movie-type">
-                <span
-                  class="type-list"
-                  v-for="genres in movie.genres"
-                  :key="genres.id"
-                  >{{ genres.name }}</span
-                >
-              </div>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-row dense>
-                <v-col cols="9" md="10">
-                  <watchBtn
-                    :prepend-icon="'mdi-play'"
-                    :text="'รับชมเดี๋ยวนี้'"
-                    :color="'#ffffff'"
-                    :icon-color="'#000'"
-                    :text-color="'#000'"
-                  />
-                </v-col>
-                <v-col cols="1" md="2"
-                  ><watchBtn :prepend-icon="'mdi-plus'"
-                /></v-col>
-              </v-row>
-            </v-card-actions>
-          </v-card>
-          <div class="image-cover">
-            <img :src="getImageUrl(movie.backdrop_path)" alt="" />
+        <div>
+          <div v-if="getLogoUrl(logo.file_path !== undefined)">
+            <img
+              class="white--text align-center movie-logo"
+              :src="getLogoUrl(logo.file_path)"
+            />
           </div>
-        </v-carousel-item>
-      </v-carousel>
+          <div v-else>
+            <img
+              class="white--text align-center movie-logo"
+              src="../static//movieImg//logos//404logo.png"
+              alt="404 logo"
+            />
+          </div>
+        </div>
+
+        <v-card-text class="text--primary px-0">
+          <div class="movie-detail">
+            <h3>{{ movie.release_date }}</h3>
+            <v-icon>mdi-circle-small</v-icon>
+            <h3>{{ movie.runtime }} นาที</h3>
+            <v-icon>mdi-circle-small</v-icon>
+            <div class="language">
+              <span
+                v-for="language in movie.spoken_languages"
+                :key="language.iso_639_1"
+              >
+                {{ language.name }}
+              </span>
+            </div>
+
+            <!-- เรทอายุ -->
+            <v-icon>mdi-circle-small</v-icon>
+            <div class="movie-rate">
+              <h3>ว่าง</h3>
+            </div>
+          </div>
+          <div class="movie-overview">
+            <h3>
+              {{ movie.overview }}
+            </h3>
+          </div>
+          <div class="movie-type">
+            <span
+              class="type-list"
+              v-for="genres in movie.genres"
+              :key="genres.id"
+              >{{ genres.name }}</span
+            >
+          </div>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-row dense>
+            <v-col cols="9" md="10">
+              <watchBtn
+                :prepend-icon="'mdi-play'"
+                :text="'รับชมเดี๋ยวนี้'"
+                :color="'#ffffff'"
+                :icon-color="'#000'"
+                :text-color="'#000'"
+              />
+            </v-col>
+            <v-col cols="1" md="2"
+              ><watchBtn :prepend-icon="'mdi-plus'"
+            /></v-col>
+          </v-row>
+        </v-card-actions>
+      </v-card>
+      <div class="image-cover">
+        <img :src="getImageUrl(movie.backdrop_path)" alt="" />
+      </div>
     </div>
 
-
     <!-- สำหรับซีรีส์ -->
-    <div>
+    <!-- <div>
       <v-container>
         <div class="title-season">
           <v-row>
@@ -140,7 +136,7 @@
           </v-card>
         </div>
       </v-container>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -153,20 +149,21 @@ export default {
   components: { watchBtn, MainSideBar },
 
   async asyncData({ params, $axios }) {
-    try {
-      const movieResponse = await $axios.$get(
-        `https://api.themoviedb.org/3/movie/${params.id}?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=th-TH`
-      );
-      const rateResponse = await $axios.$get(
-        `https://api.themoviedb.org/3/movie/${params.id}/release_dates?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=us-US`
-      );
-      console.log(rateResponse)
-
-      return { movie: movieResponse || {}, rate: rateResponse || {} };
-    } catch (error) {
-      console.error(`Error fetching movie data for ${params.id}`, error);
-      return { movie: {}, rate: {} };
-    }
+    const movieResponse = await $axios.$get(
+      `https://api.themoviedb.org/3/movie/${params.id}?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=th-TH`
+    );
+    const rateResponse = await $axios.$get(
+      `https://api.themoviedb.org/3/movie/${params.id}/release_dates?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=en-US`
+    );
+    const logoResponse = await $axios.$get(
+      `https://api.themoviedb.org/3/movie/${params.id}/images?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=en`
+    );
+    console.log(logoResponse.logos);
+    return {
+      movie: movieResponse || {},
+      rate: rateResponse.results || {},
+      logo: logoResponse.logos[0] || {},
+    };
   },
 
   methods: {
@@ -174,10 +171,13 @@ export default {
       const baseImageUrl = "https://image.tmdb.org/t/p/original";
       return `${baseImageUrl}${posterPath}`;
     },
-    /*  getLogoUrl(logoPath) {
-      const baseLogoUrl = "https://image.tmdb.org/t/p/original";
-      return `${baseLogoUrl}${logoPath}`;
-    }, */
+    getLogoUrl(logoPath) {
+      const baseLogoUrl = "https://image.tmdb.org/t/p/w500";
+      if (logoPath) {
+        return `${baseLogoUrl}${logoPath}`;
+      }
+      return `../static/movieImg/logos/404logo.png`;
+    },
   },
 };
 </script>
@@ -190,7 +190,6 @@ export default {
 }
 .image-cover {
   position: relative;
-  float: bottom;
   height: 100%;
   width: 100%;
 }
@@ -211,7 +210,7 @@ export default {
 }
 
 .movie-logo {
-  width: 400px;
+  width: 500px;
 }
 .detail-box {
   width: 500px;

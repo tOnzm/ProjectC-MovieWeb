@@ -7,7 +7,7 @@
       width="500"
       floating
       expand-on-hover
-      mini-variant-width="75"
+      mini-variant-width="100"
     >
       <div class="Logo">
         <img src="@/static/logo-d-plus.svg" />
@@ -65,7 +65,7 @@ export default {
         {
           icon: "mdi-movie-open",
           title: "ภาพยนตร์",
-          to: "/",
+          to: "/movie",
         },
         {
           icon: "mdi-star-four-points",
@@ -87,7 +87,7 @@ export default {
 .custom-drawer {
   background: linear-gradient(
     90deg,
-    rgba(15, 16, 20, 1) 20%,
+    rgba(15, 16, 20, 1) 30%,
     rgba(15, 16, 20, 0) 100%
   );
   display: flex;
