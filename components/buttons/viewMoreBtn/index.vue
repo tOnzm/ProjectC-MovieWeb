@@ -24,7 +24,7 @@ export default {
         display: none;
     }
     .mini-view{
-        display: block;
+        display: none;
     }    
 }
 </style>

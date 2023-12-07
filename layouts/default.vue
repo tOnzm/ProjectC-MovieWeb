@@ -16,4 +16,10 @@ export default {
 * {
   text-decoration: none;
 }
+.v-overlay__scrim {
+  display: none;
+}
+a:link {
+  color: inherit;
+}
 </style>
