@@ -9,7 +9,7 @@
         <!-- โลโก้หนัง -->
 
         <div>
-          <div v-if="getLogoUrl(logo.file_path !== undefined)">
+          <div v-if="logo.file_path && logo.file_path.length > 0">
             <img
               class="white--text align-center movie-logo"
               :src="getLogoUrl(logo.file_path)"
@@ -18,7 +18,7 @@
           <div v-else>
             <img
               class="white--text align-center movie-logo"
-              src="../static//movieImg//logos//404logo.png"
+              src="../static//movieImg//logos/404logo.png"
               alt="404 logo"
             />
           </div>
@@ -81,62 +81,6 @@
         <img :src="getImageUrl(movie.backdrop_path)" alt="" />
       </div>
     </div>
-
-    <!-- สำหรับซีรีส์ -->
-    <!-- <div>
-      <v-container>
-        <div class="title-season">
-          <v-row>
-            <v-col md="2"
-              ><v-btn text plain x-large><h2>ตอน</h2></v-btn></v-col
-            >
-
-            <v-col md="3"
-              ><v-btn text x-large plain
-                ><h2>ตัวอย่างและอื่นๆ</h2></v-btn
-              ></v-col
-            >
-
-            <v-col md="3"
-              ><v-btn text x-large plain><h2>แนวคล้ายกัน</h2></v-btn></v-col
-            >
-          </v-row>
-          <v-divider class="my-5"></v-divider>
-
-          <v-row class="season"
-            ><v-col md="1"
-              ><v-btn text class="px-10" plain><h3>ซีซั่น 1</h3></v-btn></v-col
-            >
-            <v-col md="1"
-              ><v-btn text class="px-10" plain><h3>ซีซั่น 2</h3></v-btn></v-col
-            ></v-row
-          >
-        </div>
-
-        <div v-for="n in 10" :key="n">
-          <v-card class="episode-box" flat>
-            <div class="ep-thumbnail">
-              <img :src="getImageUrl(movie.backdrop_path)" /> <img />
-            </div>
-            <v-card-text class="text--primary px-0 detail">
-              <div><h1>ชื่อตอน</h1></div>
-              <div class="ep-detail">
-                <h3>ซีซั่น 1 ตอนที่</h3>
-                <v-icon>mdi-circle-small</v-icon>
-                <h3>วันที่ฉาย</h3>
-                <v-icon>mdi-circle-small</v-icon>
-                <h3>เวลา</h3>
-              </div>
-              <div class="movie-synopsis">
-                <h3>
-                  {{ movie.overview }}
-                </h3>
-              </div>
-            </v-card-text>
-          </v-card>
-        </div>
-      </v-container>
-    </div> -->
   </div>
 </template>
 

@@ -17,18 +17,35 @@
           :key="item.id"
         >
           <v-card class="detail-box" flat>
-            <v-img
-              class="white--text align-center movie-logo"
-              :src="getImageUrl(item.backdrop_path)"
-            >
-            </v-img>
+            <div v-if="item.image && item.image.length > 0">
+              <div
+                v-for="logo in item.image"
+                :key="logo.file_path"
+                class="movie-logo"
+              >
+                <img :src="getImageUrl(logo.file_path)" alt="" />
+              </div>
+            </div>
+            <!-- ถ้าไม่มีข้อมูล logos ให้แสดงรูปจาก static -->
+            <div v-else>
+              <div v-for="staticLogo in item.staticLogos" :key="staticLogo">
+                <img :src="getStaticLogoUrl(staticLogo)" alt="" width="10px" />
+              </div>
+            </div>
+
             <v-card-text class="text--primary px-0">
               <div class="movie-detail">
-                <h3>2023</h3>
+                <h3>{{ movieYear(item.release_date) }}</h3>
+
                 <v-icon>mdi-circle-small</v-icon>
-                <h3>Season 1</h3>
-                <v-icon>mdi-circle-small</v-icon>
-                <h3>Thai</h3>
+                <div class="language">
+                  <span
+                    v-for="language in item.spoken_languages"
+                    :key="language"
+                  >
+                    {{ language.name }}
+                  </span>
+                </div>
                 <v-icon>mdi-circle-small</v-icon>
                 <div class="movie-rate">
                   <h3>15+</h3>
@@ -40,8 +57,8 @@
                 </h3>
               </div>
               <div class="movie-type">
-                <span v-for="item2 in movies.genres" :key="item2.id">{{
-                  item2.name
+                <span v-for="genres in item.genres" :key="genres.id">{{
+                  genres.name
                 }}</span>
               </div>
             </v-card-text>
@@ -49,10 +66,12 @@
             <v-card-actions>
               <v-row dense>
                 <v-col cols="9" md="10">
-                  <watchBtn
-                    :prepend-icon="'mdi-play'"
-                    :text="'รับชมเดี๋ยวนี้'"
-                  />
+                  <NuxtLink :to="`/${item.id}`">
+                    <watchBtn
+                      :prepend-icon="'mdi-play'"
+                      :text="'รับชมเดี๋ยวนี้'"
+                    />
+                  </NuxtLink>
                 </v-col>
                 <v-col cols="1" md="2"
                   ><watchBtn :prepend-icon="'mdi-plus'"
@@ -80,24 +99,63 @@ export default {
   data() {
     return {
       topRatedMovies: [],
-      logoMovies: [],
-      movies: [],
     };
   },
+
   methods: {
     getImageUrl(imagePath) {
       const baseImageUrl = "https://image.tmdb.org/t/p/original";
       return `${baseImageUrl}${imagePath}`;
     },
+    getLogoUrl(imagePath) {
+      const baseImageUrl = "https://image.tmdb.org/t/p/w500";
+      return `${baseImageUrl}${imagePath}`;
+    },
+    movieYear(year) {
+      return year.split("-")[0];
+    },
+    movieTime(time) {
+      const hours = Math.floor(time / 60);
+      const min = time % 60;
+      return `${hours} ชั่วโมง ${min} นาที`;
+    },
 
     async fetchSomething() {
-      const topRatedResponse = await this.$axios.$get(
+      const nowPlayingResponse = await this.$axios.$get(
         "https://api.themoviedb.org/3/movie/top_rated?api_key=3c79a5d5b0c2bd68652652a202b1c175"
       );
+      // ทำ API calls ทั้งหมดพร้อมกัน
+      const movieDetailsPromises = nowPlayingResponse.results.map(
+        async (movie) => {
+          const movieId = movie.id;
+          // รายละเอียดหนัง
+          const movieDetailsResponse = await this.$axios.$get(
+            `https://api.themoviedb.org/3/movie/${movieId}?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=th&en`
+          );
+          //รูปปก ,โลโก้
+          const movieImagesResponse = await this.$axios.$get(
+            `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=en`
+          );
 
-      this.topRatedMovies = topRatedResponse.results;
-
-      console.log(topRatedResponse.results);
+          const rateResponse = await this.$axios.$get(
+            `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=en-US`
+          );
+          //ตัดเอาแค่ข้อมูลจาก array 1
+          const selectedLogos = movieImagesResponse.logos.slice(0, 1);
+          // รวมข้อมูล
+          const mergedMovie = {
+            ...movie,
+            ...movieDetailsResponse,
+            image: selectedLogos,
+            ...rateResponse.results,
+          };
+          // เพิ่มหนังที่ผtopRatedMoviesสมแล้วเข้าไปในอาร์เรย์ nowPlayings
+          this.topRatedMovies.push(mergedMovie);
+          console.log(rateResponse.results);
+        }
+      );
+      // รอให้ทุก API calls เสร็จสมบูรณ์
+      await Promise.all(movieDetailsPromises);
     },
   },
   mounted() {
@@ -107,6 +165,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.language span {
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 0.5rem;
+}
 .image-cover {
   position: relative;
   height: 100%;
@@ -127,9 +190,16 @@ export default {
   width: 100%;
   object-fit: cover;
 }
-
 .movie-logo {
+  width: 400px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.movie-logo img {
   width: 100%;
+  
 }
 .detail-box {
   width: 500px;
@@ -139,9 +209,10 @@ export default {
   top: 2%;
   left: 5%;
   background: transparent;
-  z-index: 2;
+  z-index: 999;
 }
 .movie-detail {
+  padding-top: 2rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -154,6 +225,7 @@ export default {
   border-radius: 5px;
 }
 .movie-synopsis h3 {
+  padding-top: 1rem;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -164,7 +236,11 @@ export default {
 .movie-type {
   display: flex;
   column-gap: 0.75rem;
+  font-weight: 800;
+  padding-top: 1rem;
+  font-size: 1rem;
 }
+
 .logo-mobile {
   display: none;
 }

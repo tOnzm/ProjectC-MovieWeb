@@ -1,7 +1,8 @@
 <template>
   <div>
     <carouselsImage />
-    <nowPlaying title-text="มาแรงในขณะนี้" />
+    <nowPlaying title-text="มาใหม่" />
+    <popular title-text="ได้รับความนิยม" />
 
     <bottomNav />
   </div>
@@ -10,10 +11,11 @@
 <script>
 import nowPlaying from "../components/nowPlaying/index.vue";
 import carouselsImage from "../components/carouselsImage/index.vue";
+import popular from "../components/popular/index.vue"
 
 export default {
   name: "IndexPage",
-  components: { nowPlaying, carouselsImage },
+  components: { nowPlaying, carouselsImage,popular },
   head: {
     title: " หน้าแรก",
   },

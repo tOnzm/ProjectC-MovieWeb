@@ -12,3 +12,8 @@ export default {
   components: { MainSideBar },
 };
 </script>
+<style lang="scss">
+* {
+  text-decoration: none;
+}
+</style>
