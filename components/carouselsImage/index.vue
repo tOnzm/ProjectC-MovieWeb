@@ -17,7 +17,7 @@
           :key="item.id"
         >
           <detailBox
-            :movie-logo="item.image[0].file_path"
+            :movieLogo="item.image[0].file_path"
             :year="item.release_date"
             :voice="item.spoken_languages[0].name"
             :contentRating="'15+'"

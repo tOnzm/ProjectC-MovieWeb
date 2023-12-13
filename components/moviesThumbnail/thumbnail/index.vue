@@ -2,7 +2,7 @@
   <div>
     <NuxtLink :to="`/${path}`" class="thumbnail-main">
       <div class="thumbnail-movie">
-        <img class="align-center" :src="getImageUrl(thumnailImage)" />
+        <img class="align-center" :src="getImageUrl(thumbnailImage)" />
       </div>
       <div class="mx-1 thumbnail-hover">
         <div class="hover-detail">
@@ -33,7 +33,7 @@ export default {
   name: "thumbnail",
   props: {
     path: Number,
-    thumnailImage: String,
+    thumbnailImage: String,
     backdropImage: String,
     time: Number,
     year: String,
@@ -44,8 +44,8 @@ export default {
       return getImageUrl(path);
     },
 
-    getLogoUrl(movieLogo) {
-      return getLogoUrl(movieLogo);
+    getLogoUrl(path) {
+      return getLogoUrl(path);
     },
     movieYear(year) {
       return movieYear(year);
