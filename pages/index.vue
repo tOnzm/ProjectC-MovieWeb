@@ -1,10 +1,11 @@
 <template>
   <div>
     <carouselsImage />
+    <studioMenu />
     <moviesThumbnail :titleText="'มาใหม่'">
       <div v-for="item in movies" :key="item.id">
         <thumbnail
-          :thumnailImage="item.poster_path"
+          :thumbnailImage="item.poster_path"
           :path="item.id"
           :backdropImage="item.backdrop_path"
           :movieLogo="item.image[0].file_path"
@@ -19,12 +20,13 @@
 
 <script>
 import carouselsImage from "../components/carouselsImage/index.vue";
+import studioMenu from "../components/studioMenu/index.vue";
 import moviesThumbnail from "../components/moviesThumbnail/index";
 import thumbnail from "../components/moviesThumbnail/thumbnail/index.vue";
 import { fetchMovies2 } from "../plugins/api.js";
 export default {
   name: "IndexPage",
-  components: { carouselsImage, moviesThumbnail, thumbnail },
+  components: { carouselsImage, moviesThumbnail, thumbnail, studioMenu },
   head: {
     title: " หน้าแรก",
   },
