@@ -29,7 +29,7 @@ export function movieTime(time) {
 // นำข้อมูลใน หมวดหมู่มาแสดง
 export function getGenresNames(genres) {
     return genres.map((genre, index) => {
-        const separator = index !== genres.length - 1 ? ' \u2022 ' : '';
+        const separator = index !== genres.length - 1 ? ' \u007c ' : '';
         return `${genre.name}${separator}`;
     }).join('');
 }
@@ -51,14 +51,14 @@ export async function fetchMovies(axios) {
             const movieImagesResponse = await axios.$get(
                 `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=en`
             );
-            // ตัดเอาแค่ข้อมูลจาก array 1
-            const selectedLogos = movieImagesResponse.logos.slice(0, 1);
+            // ตัดเอาแค่ข้อมูลจาก logos => array 0
+            const moviesLogos = movieImagesResponse.logos[0];
 
             // รวมข้อมูล
             const mergedMovie = {
                 ...movie,
                 ...movieDetailsResponse,
-                image: selectedLogos,
+                ...moviesLogos,
             };
 
             // เพิ่มหนังที่ผสมแล้วเข้าไปในอาร์เรย์ nowPlayings
@@ -71,7 +71,7 @@ export async function fetchMovies(axios) {
     return Promise.all(movieDetailsPromises);
 }
 
-export async function fetchMovies2(axios) {
+/* export async function fetchMovies2(axios) {
     const nowPlayingResponse = await axios.$get(
         "https://api.themoviedb.org/3/movie/now_playing?api_key=3c79a5d5b0c2bd68652652a202b1c175"
     );
@@ -106,4 +106,4 @@ export async function fetchMovies2(axios) {
 
     // รอให้ทุก API calls เสร็จสมบูรณ์
     return Promise.all(movieDetailsPromises);
-}
+} */

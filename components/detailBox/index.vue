@@ -1,6 +1,6 @@
 <template>
   <div class="detail-box" flat>
-    <img class="movie-logo" :src="getImageUrl(movieLogo)" />
+    <img class="movie-logo" :src="getLogoUrl(moviesLogo)" :alt= "{ alt }" />
 
     <div>
       <div class="movie-detail">
@@ -47,6 +47,7 @@ import {
   getGenresNames,
   movieYear,
   movieTime,
+  getLogoUrl,
 } from "@/plugins/api";
 
 export default {
@@ -58,13 +59,17 @@ export default {
     contentRating: String,
     overview: String,
     genres: { String, Number },
-    movieLogo: String,
+    moviesLogo: String,
     path: Number,
     time: Number,
+    alt: String,
   },
   methods: {
-    getImageUrl(path) {
-      return getImageUrl(path);
+    getImageUrl(imagePath) {
+      return getImageUrl(imagePath);
+    },
+    getLogoUrl(imagePath) {
+      return getLogoUrl(imagePath);
     },
     getGenresNames(genres) {
       return getGenresNames(genres);

@@ -8,10 +8,11 @@
           :thumbnailImage="item.poster_path"
           :path="item.id"
           :backdropImage="item.backdrop_path"
-          :movieLogo="item.image[0].file_path"
+          :moviesLogo="item.file_path"
           :year="item.release_date"
           :time="item.runtime"
-        />
+        >
+      </thumbnail>
       </div>
     </moviesThumbnail>
     <bottomNav />
@@ -23,7 +24,7 @@ import carouselsImage from "../components/carouselsImage/index.vue";
 import studioMenu from "../components/studioMenu/index.vue";
 import moviesThumbnail from "../components/moviesThumbnail/index";
 import thumbnail from "../components/moviesThumbnail/thumbnail/index.vue";
-import { fetchMovies2 } from "../plugins/api.js";
+import { fetchMovies } from "../plugins/api.js";
 export default {
   name: "IndexPage",
   components: { carouselsImage, moviesThumbnail, thumbnail, studioMenu },
@@ -36,13 +37,14 @@ export default {
     };
   },
   methods: {
-    async fetchMovies2() {
+    async fetchMovies() {
       const axios = this.$axios;
-      this.movies = await fetchMovies2(axios);
+      this.movies = await fetchMovies(axios);
+      
     },
   },
   mounted() {
-    this.fetchMovies2();
+    this.fetchMovies();
   },
 };
 </script>

@@ -2,7 +2,7 @@
   <div>
     <div class="slide-group-title">
       <h1>{{ titleText }}</h1>
-      <viewMoreBtn :path="'nowshowing'"/>
+      <viewMoreBtn :path="'nowshowing'" />
     </div>
     <v-slide-group show-arrows center-active>
       <slot> </slot>
@@ -52,7 +52,6 @@ export default {
 @media screen and(max-width: 600px) {
   .slide-group-title {
     margin: 0.75rem 0rem 0rem 0.75rem;
-
   }
   .slide-group-title h1 {
     font-size: 1rem;

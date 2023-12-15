@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <NuxtLink :to="`/${path}`" class="thumbnail-main">
       <div class="thumbnail-movie">
         <img class="align-center" :src="getImageUrl(thumbnailImage)" />
@@ -8,7 +7,16 @@
       <div class="mx-1 thumbnail-hover">
         <div class="hover-detail">
           <!-- เพิ่มเงื่อนไขที่ตรวจสอบว่ามีข้อมูล logos หรือไม่ -->
-          <img class="logo-movies" :src="getLogoUrl(movieLogo)" alt="" />
+          <img class="logo-movies" :src="getLogoUrl(moviesLogo)" alt="" />
+          <NuxtLink :to="`/${path}`">
+            <watchBtn
+              :prepend-icon="'mdi-play'"
+              :text="'รับชมเดี๋ยวนี้'"
+              :color="'#ffffff90'"
+              :icon-color="'#000'"
+              :text-color="'#000'"
+            />
+          </NuxtLink>
           <div>
             <div class="detail-text">
               <p>{{ movieYear(year) }}</p>
@@ -17,7 +25,11 @@
             </div>
           </div>
         </div>
-        <img class="align-center" :src="getImageUrl(backdropImage)" />
+
+        <img
+          class="align-center backdrop-Image"
+          :src="getImageUrl(backdropImage)"
+        />
       </div>
     </NuxtLink>
   </div>
@@ -30,15 +42,18 @@ import {
   movieYear,
   movieTime,
 } from "@/plugins/api.js";
+import watchBtn from "@/components/buttons/watchBtn";
+
 export default {
   name: "thumbnail",
+  components: { watchBtn },
   props: {
     path: Number,
     thumbnailImage: String,
     backdropImage: String,
     time: Number,
     year: String,
-    movieLogo: String,
+    moviesLogo: String,
   },
   methods: {
     getImageUrl(path) {
@@ -54,6 +69,7 @@ export default {
     movieTime(time) {
       return movieTime(time);
     },
+    
   },
 };
 </script>
@@ -71,6 +87,9 @@ export default {
 
 .logo-movies {
   width: 150px !important;
+}
+.backdrop-Image {
+  border-radius: 10px;
 }
 .detail-text {
   padding-top: 1rem;
@@ -91,12 +110,10 @@ export default {
   transition: width 0.5s;
   transition-timing-function: ease-in-out;
   border-radius: 10px;
-
 }
 
 .thumbnail-hover img {
   width: 100%;
-  border-radius: 10px;
   object-fit: cover;
 }
 .thumbnail-movie img {

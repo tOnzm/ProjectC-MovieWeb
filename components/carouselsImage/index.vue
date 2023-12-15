@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- โลโก้มุมซ้ายบน ขนาด Mobile-->
-    <div class="logo-mobile"><img src="@/static/logo-d-plus.svg" alt="" /></div>
+    <div class="logo-mobile">
+      <img src="@/static/logo-d-plus.svg" alt="Disney+ Logo" />
+    </div>
     <div>
       <v-carousel
         class="carousel-image"
@@ -17,7 +19,7 @@
           :key="item.id"
         >
           <detailBox
-            :movieLogo="item.image[0].file_path"
+            :moviesLogo="item.file_path"
             :year="item.release_date"
             :voice="item.spoken_languages[0].name"
             :contentRating="'15+'"
@@ -25,10 +27,11 @@
             :genres="item.genres"
             :path="item.id"
             :time="item.runtime"
+            :alt="item.title"
           />
 
           <div class="image-cover">
-            <img :src="getImageUrl(item.backdrop_path)" alt=" " />
+            <img :src="getImageUrl(item.backdrop_path)" :alt="item.title" />
           </div>
         </v-carousel-item>
       </v-carousel>
