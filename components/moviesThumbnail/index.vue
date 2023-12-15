@@ -2,7 +2,7 @@
   <div>
     <div class="slide-group-title">
       <h1>{{ titleText }}</h1>
-      <viewMoreBtn />
+      <viewMoreBtn :path="'nowshowing'"/>
     </div>
     <v-slide-group show-arrows center-active>
       <slot> </slot>

@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <NuxtLink :to="`/${path}`" class="thumbnail-main">
       <div class="thumbnail-movie">
         <img class="align-center" :src="getImageUrl(thumnailImage)" />
@@ -89,6 +90,8 @@ export default {
   object-fit: fill;
   transition: width 0.5s;
   transition-timing-function: ease-in-out;
+  border-radius: 10px;
+
 }
 
 .thumbnail-hover img {
