@@ -1,6 +1,6 @@
 <template>
   <div class="detail-box" flat>
-    <img class="movie-logo" :src="getLogoUrl(moviesLogo)" :alt= "{ alt }" />
+    <img class="movie-logo" :src="getLogoUrl(moviesLogo)" :alt="{ alt }" />
 
     <div>
       <div class="movie-detail">
@@ -85,12 +85,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.movie-logo {
-  width: 500px;
-  height: 180px;
-  object-fit: scale-down;
-  align-items: flex-start;
-}
 .detail-box {
   width: 500px;
   height: 500px;
@@ -102,6 +96,13 @@ export default {
   background: transparent;
   z-index: 999;
 }
+.movie-logo {
+  width: 500px;
+  height: 180px;
+  object-fit: scale-down;
+  align-items: flex-start;
+}
+
 .movie-detail {
   display: flex;
   justify-content: flex-start;
@@ -133,40 +134,31 @@ export default {
 
 @media screen and(max-width: 600px) {
   .detail-box {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     width: 100%;
-    height: 200px;
-    margin: 0;
-    padding: 1rem;
+    height: 250px;
+    margin: 0rem;
+    padding: 0rem;
     position: absolute;
-    top: 20%;
+    top: 10%;
     left: 0%;
     background: transparent;
-    z-index: 2;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
   .movie-logo {
-    width: 200px;
-    height: 0px;
-    object-fit: contain;
+    max-width: 80%;
+    height: 150px;
+    object-fit: scale-down;
   }
   .movie-detail {
     display: flex;
     justify-content: center;
-    height: 50px;
-    width: 100%;
-  }
-  .movie-detail h3 {
-    font-size: 14px;
-    text-align: center;
-  }
-  .movie-rating {
-    display: flex;
     align-items: center;
-    background-color: #ffffff20;
-    padding: 1px 5px 1px 5px;
-    border-radius: 5px;
+    height: 50px;
+    font-size: 0.8rem;
   }
   .movie-overview {
     display: none;

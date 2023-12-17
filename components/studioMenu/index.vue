@@ -1,9 +1,14 @@
 <template>
   <div>
     <v-row class="studio-menu">
-      <v-col v-for="item in studio" :key="item.id">
+      <v-col
+        cols="4"
+        v-for="item in studio"
+        :key="item.id"
+        style="padding: 0.2rem !important"
+      >
         <div class="studio-menu-box">
-          <img :src="item.logo" alt="" />
+          <img :src="item.studio_logo" alt="" />
         </div>
       </v-col>
     </v-row>
@@ -18,32 +23,32 @@ export default {
       studio: [
         {
           id: 1,
-          logo: require("@/static/movieImg/card/disney.webp"),
+          studio_logo: require("@/static/movieImg/card/disney.webp"),
         },
         {
           id: 2,
 
-          logo: require("@/static/movieImg/card/marvel.webp"),
+          studio_logo: require("@/static/movieImg/card/marvel.webp"),
         },
         {
           id: 3,
 
-          logo: require("@/static/movieImg/card/national.webp"),
+          studio_logo: require("@/static/movieImg/card/national.webp"),
         },
         {
           id: 4,
 
-          logo: require("@/static/movieImg/card/pixar.webp"),
+          studio_logo: require("@/static/movieImg/card/pixar.webp"),
         },
         {
           id: 5,
 
-          logo: require("@/static/movieImg/card/star.webp"),
+          studio_logo: require("@/static/movieImg/card/star.webp"),
         },
         {
           id: 6,
 
-          logo: require("@/static/movieImg/card/starwars.webp"),
+          studio_logo: require("@/static/movieImg/card/starwars.webp"),
         },
       ],
     };
@@ -77,5 +82,18 @@ export default {
 .studio-menu-box img {
   border-radius: 0.75rem;
   width: 100%;
+}
+
+//Responsive
+@media screen and(max-width: 600px) {
+  .studio-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
 }
 </style>
