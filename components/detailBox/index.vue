@@ -6,7 +6,7 @@
       <div class="movie-detail">
         <h3>{{ movieYear(year) }}</h3>
         <v-icon>mdi-circle-small</v-icon>
-        <h3>{{ voice }}</h3>
+        <h3>{{ languages(voice) }}</h3>
         <v-icon>mdi-circle-small</v-icon>
         <h3>{{ movieTime(time) }}</h3>
         <v-icon>mdi-circle-small</v-icon>
@@ -18,7 +18,7 @@
         <h4>{{ overview }}</h4>
       </div>
       <div class="movie-genres">
-        <h4>{{ getGenresNames(genres) }}</h4>
+        <h4>{{ genres(genresData) }}</h4>
       </div>
     </div>
     <div>
@@ -48,6 +48,8 @@ import {
   movieYear,
   movieTime,
   getLogoUrl,
+  genres,
+  languages,
 } from "@/plugins/api";
 
 export default {
@@ -58,7 +60,7 @@ export default {
     voice: String,
     contentRating: String,
     overview: String,
-    genres: { String, Number },
+    genresData: { String, Number },
     moviesLogo: String,
     path: Number,
     time: Number,
@@ -68,8 +70,8 @@ export default {
     getImageUrl(imagePath) {
       return getImageUrl(imagePath);
     },
-    getLogoUrl(imagePath) {
-      return getLogoUrl(imagePath);
+    getLogoUrl(logoPath) {
+      return getLogoUrl(logoPath);
     },
     getGenresNames(genres) {
       return getGenresNames(genres);
@@ -79,6 +81,12 @@ export default {
     },
     movieTime(time) {
       return movieTime(time);
+    },
+    genres(genresData){
+      return genres(genresData)
+    },
+    languages(languagesData){
+      return languages(languagesData);
     },
   },
 };
@@ -167,4 +175,78 @@ export default {
     display: none;
   }
 }
+
+@media screen and(max-width: 960px) {
+  .detail-box {
+    width: 100%;
+    height: 250px;
+    margin: 0rem;
+    padding: 0rem;
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    background: transparent;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  .movie-logo {
+    max-width: 80%;
+    height: 150px;
+    object-fit: scale-down;
+  }
+  .movie-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-size: 0.8rem;
+  }
+  .movie-overview {
+    display: none;
+  }
+  .movie-genres {
+    display: none;
+  }
+}
+
+@media screen and(max-width: 1264px) {
+  .detail-box {
+    width: 100%;
+    height: 300px;
+    margin: 0rem;
+    padding: 0rem;
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    background: transparent;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  .movie-logo {
+    max-width: 80%;
+    height: 150px;
+    object-fit: scale-down;
+  }
+  .movie-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-size: 0.8rem;
+  }
+  .movie-overview {
+    display: none;
+  }
+  .movie-genres {
+    display: none;
+  }
+}
+
+
 </style>

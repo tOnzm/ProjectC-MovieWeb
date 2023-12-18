@@ -5,28 +5,55 @@
       <img src="@/static/logo-d-plus.svg" alt="Disney+ Logo" />
     </div>
     <div>
-      <v-carousel
-        class="carousel-image"
-        height="70vh"
-        hide-delimiters
-        cycle
-        show-arrows-on-hover
-        :show-arrows="false"
-      >
-        <v-carousel-item class="carousel-item">
-      
-          <div class="image-cover">
-            <img :src="getImageUrl(movie.backdrop_path)" :alt="movie.title" />
+      <div class="image-cover">
+        <img :src="getImageUrl(movie.backdrop_path)" :alt="movie.title" />
+      </div>
+      <div class="detail-box" flat>
+        <img class="movie-logo" :src="getLogoUrl(movie.file_path)" alt="" />
+
+        <div class="movie-detail">
+          <h4>{{ movieYear(movie.release_date) }}</h4>
+          <v-icon>mdi-circle-small</v-icon>
+          <h4>{{ languages(movie.spoken_languages) }}</h4>
+          <v-icon>mdi-circle-small</v-icon>
+          <h4>{{ movieTime(movie.runtime) }}</h4>
+          <v-icon>mdi-circle-small</v-icon>
+          <div class="movie-rating">
+            <h4>PG-13</h4>
           </div>
-        </v-carousel-item>
-      </v-carousel>
+        </div>
+        <div class="movie-overview">
+          <h4>{{ movie.overview }}</h4>
+        </div>
+        <div class="movie-genres">
+          <h4>{{ genres(movie.genres) }}</h4>
+        </div>
+        <div>
+          <v-row dense>
+            <v-col cols="9" md="10">
+              <NuxtLink :to="`/${movie.id}`">
+                <watchBtn
+                  :prepend-icon="'mdi-play'"
+                  :text="'รับชมเดี๋ยวนี้'"
+                  :color="'#ffffff'"
+                  :icon-color="'#000'"
+                  :text-color="'#000'"
+                />
+              </NuxtLink>
+            </v-col>
+            <v-col cols="1" md="2"
+              ><watchBtn :prepend-icon="'mdi-plus'"
+            /></v-col>
+          </v-row>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import watchBtn from "../components/buttons/watchBtn.vue";
-import MainSideBar from "../components/sidebar/index.vue";
+import detailBox from "../components/detailBox/index.vue";
 import { paramsMovies } from "../plugins/params";
 import {
   getImageUrl,
@@ -34,11 +61,13 @@ import {
   movieYear,
   movieTime,
   getLogoUrl,
+  languages,
+  genres,
 } from "../plugins/api";
 
 export default {
   name: "moviePage",
-  components: { watchBtn, MainSideBar },
+  components: { watchBtn, detailBox },
 
   data() {
     return {
@@ -68,13 +97,16 @@ export default {
         return "Year not available";
       }
     },
-    
     movieTime(time) {
       return movieTime(time);
     },
 
-
-
+    languages(languagesData) {
+      return languages(languagesData);
+    },
+    genres(genresData) {
+      return genres(genresData);
+    },
   },
   mounted() {
     this.paramsMovies();
@@ -98,7 +130,7 @@ export default {
   z-index: 2;
 }
 .image-cover img {
-  height: auto;
+  height: 100vh;
   width: 100%;
   object-fit: cover;
 }
@@ -106,6 +138,55 @@ export default {
 .logo-mobile {
   display: none;
 }
+
+.detail-box {
+  width: 500px;
+  height: 500px;
+  margin: 1rem;
+  padding: 1rem;
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  background: transparent;
+  z-index: 999;
+}
+.movie-logo {
+  width: 500px;
+  height: 180px;
+  object-fit: scale-down;
+  align-items: flex-start;
+}
+
+.movie-detail {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+  width: auto;
+}
+.movie-rating {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff20;
+  padding: 2px 10px 2px 10px;
+  border-radius: 5px;
+}
+.movie-overview h4 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  color: #ffffff90;
+  font-weight: 400;
+}
+.movie-genres {
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+  font-size: 1rem;
+  height: 50px;
+}
+
 @media screen and(max-width: 600px) {
   .image-cover {
     position: relative;

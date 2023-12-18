@@ -3,6 +3,8 @@
     <v-row class="studio-menu">
       <v-col
         cols="4"
+        md="2"
+        sm="2"
         v-for="item in studio"
         :key="item.id"
         style="padding: 0.2rem !important"
@@ -87,13 +89,44 @@ export default {
 //Responsive
 @media screen and(max-width: 600px) {
   .studio-menu {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: auto;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
 }
+@media screen and(max-width: 960px) {
+  .studio-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .studio-menu-box,
+  .studio-menu-box img {
+    border-radius: 0.5rem;
+  }
+}
+@media screen and(max-width: 1264px) {
+  .studio-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .studio-menu-box,
+  .studio-menu-box img {
+    border-radius: 0.5rem;
+  }
 }
 </style>

@@ -133,4 +133,15 @@ export default {
     display: none;
   }
 }
+
+@media screen and(max-width: 960px) {
+  .custom-drawer {
+    display: none;
+  }
+}
+@media screen and(max-width: 1264px) {
+  .custom-drawer {
+    display: none;
+  }
+}
 </style>

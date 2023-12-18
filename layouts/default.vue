@@ -16,7 +16,7 @@ export default {
 * {
   text-decoration: none;
 }
-.v-overlay__scrim {
+.v-overlay{
   display: none;
 }
 a:link {

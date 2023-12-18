@@ -21,10 +21,10 @@
           <detailBox
             :moviesLogo="item.file_path"
             :year="item.release_date"
-            :voice="item.spoken_languages[0].name"
+            :voice="item.spoken_languages"
             :contentRating="'15+'"
             :overview="item.overview"
-            :genres="item.genres"
+            :genresData="item.genres"
             :path="item.id"
             :time="item.runtime"
             :alt="item.title"
@@ -55,8 +55,8 @@ export default {
   },
 
   methods: {
-    getImageUrl(path) {
-      return getImageUrl(path);
+    getImageUrl(imagePath) {
+      return getImageUrl(imagePath);
     },
     async fetchMovies() {
       const axios = this.$axios;
@@ -116,6 +116,76 @@ export default {
   }
   .v-carousel {
     height: 350px !important;
+  }
+
+  .logo-mobile {
+    display: block;
+    position: absolute;
+    z-index: 999;
+    margin: 1rem;
+  }
+  .logo-mobile img {
+    width: 45px;
+  }
+}
+
+@media screen and(max-width: 960px) {
+  .image-cover {
+    position: relative;
+    height: 30vh;
+    width: 100%;
+  }
+  .image-cover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -1%;
+    background: linear-gradient(to bottom, #1212122a 0%, #121212 100%);
+    z-index: 1;
+  }
+
+  .image-cover img {
+    height: 30vh;
+    width: 100%;
+  }
+  .v-carousel {
+    height: 350px !important;
+  }
+
+  .logo-mobile {
+    display: block;
+    position: absolute;
+    z-index: 999;
+    margin: 1rem;
+  }
+  .logo-mobile img {
+    width: 45px;
+  }
+}
+@media screen and(max-width: 1264px) {
+  .image-cover {
+    position: relative;
+    height: 30vh;
+    width: 100%;
+  }
+  .image-cover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 2%;
+    background: linear-gradient(to bottom, #1212122a 0%, #121212 100%);
+    z-index: 1;
+  }
+  .image-cover img {
+    height: auto;
+    width: 100%;
+  }
+  .v-carousel {
+    height: 400px !important;
   }
 
   .logo-mobile {

@@ -4,7 +4,7 @@
       <h1>{{ titleText }}</h1>
       <viewMoreBtn :path="'nowshowing'" />
     </div>
-    <v-slide-group show-arrows center-active>
+    <v-slide-group show-arrows>
       <slot> </slot>
     </v-slide-group>
   </div>
@@ -59,6 +59,45 @@ export default {
   }
 
   .v-slide-group__next,
+  .v-slide-group__prev {
+    display: none;
+  }
+  .v-slide-group {
+    margin-left: 0vw;
+  }
+}
+@media screen and(max-width: 960px) {
+  .slide-group-title {
+    margin: 0.75rem 0rem 0rem 0.75rem;
+  }
+  .slide-group-title h1 {
+    font-size: 1rem;
+    margin-left: 0;
+  }
+
+  .v-slide-group__next {
+    display: none;
+  }
+  .v-slide-group__prev {
+    display: none;
+  }
+  .v-slide-group {
+    margin-left: 0vw;
+  }
+}
+
+@media screen and(max-width: 1264px) {
+  .slide-group-title {
+    margin: 0.75rem 0rem 0rem 0.75rem;
+  }
+  .slide-group-title h1 {
+    font-size: 1rem;
+    margin-left: 0;
+  }
+
+  .v-slide-group__next {
+    display: none;
+  }
   .v-slide-group__prev {
     display: none;
   }
