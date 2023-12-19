@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "WatchNowButton",
+  name: "PlayNowButton",
   props: {
     text: String,
     prependIcon: String,
@@ -34,6 +34,7 @@ export default {
 .button-custom .v-btn {
   background-color: #ffffff20;
 }
+
 
 @media screen and (max-width: 600px) {
   .button-custom .v-btn {

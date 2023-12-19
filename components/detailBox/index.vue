@@ -24,8 +24,8 @@
     <div>
       <v-row dense>
         <v-col cols="9" md="10">
-          <NuxtLink :to="`/${path}`">
-            <watchBtn
+          <NuxtLink :to="`/${front}/${path}`">
+            <playNowBtn
               :prepend-icon="'mdi-play'"
               :text="'รับชมเดี๋ยวนี้'"
               :color="'#ffffff'"
@@ -36,17 +36,16 @@
             />
           </NuxtLink>
         </v-col>
-        <v-col cols="1" md="2"><watchBtn :prepend-icon="'mdi-plus'" /></v-col>
+        <v-col cols="1" md="2"><playNowBtn :prepend-icon="'mdi-plus'"  /></v-col>
       </v-row>
     </div>
   </div>
 </template>
 
 <script>
-import watchBtn from "../buttons/watchBtn.vue";
+import playNowBtn from "../buttons/playNowBtn/index";
 import {
   getImageUrl,
-  getGenresNames,
   movieYear,
   movieTime,
   getLogoUrl,
@@ -58,7 +57,7 @@ import {
 
 export default {
   name: "DetailBox",
-  components: { watchBtn },
+  components: { playNowBtn },
   props: {
     year: String,
     voice: null,
@@ -69,6 +68,7 @@ export default {
     path: Number,
     time: Number,
     alt: String,
+    front: String,
   },
   methods: {
     getImageUrl(imagePath) {
@@ -77,9 +77,7 @@ export default {
     getLogoUrl(logoPath) {
       return getLogoUrl(logoPath);
     },
-    getGenresNames(genres) {
-      return getGenresNames(genres);
-    },
+
     movieYear(year) {
       return movieYear(year);
     },
@@ -95,9 +93,9 @@ export default {
     overview(overviewData) {
       return overview(overviewData);
     },
-    certification(certificationData){
+    certification(certificationData) {
       return certification(certificationData);
-    }
+    },
   },
 };
 </script>
@@ -115,10 +113,10 @@ export default {
   z-index: 999;
 }
 .movie-logo {
-  width: 500px;
-  height: 180px;
-  object-fit: scale-down;
+  width: 100%;
+  object-fit: contain;
   align-items: center;
+  aspect-ratio: 2/1;
 }
 
 .movie-detail {
@@ -132,9 +130,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
- 
-  background-color: #ffffff20;
-  padding: 2px 10px 2px 10px;
+  background-color: #fff2;
+  backdrop-filter: blur(5px);
+  max-width: 100px;
+  min-width: 50px;
+  padding: 2px 8px 2px 8px;
   border-radius: 5px;
 }
 .movie-overview h4 {

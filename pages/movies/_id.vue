@@ -24,13 +24,13 @@
 </template>
 
 <script>
-import detailBox from "../components/detailBox/index.vue";
-import { paramsMovies } from "../plugins/params";
-import { getImageUrl, getLogoUrl } from "../plugins/api";
+import detailBox from "@/components/detailBox/index.vue";
+import { paramsMovies } from "@/plugins/params";
+import { getImageUrl, getLogoUrl } from "@/plugins/api";
 
 export default {
   name: "moviePage",
-  components: {detailBox },
+  components: { detailBox },
 
   data() {
     return {

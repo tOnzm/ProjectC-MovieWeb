@@ -45,12 +45,12 @@ export default {
         {
           icon: "mdi-account-circle",
           title: "โปรไฟล์ของฉัน",
-          to: "/",
+          to: "/profile",
         },
         {
           icon: "mdi-magnify",
           title: "ค้นหา",
-          to: "/",
+          to: "/search",
         },
         {
           icon: "mdi-home-variant",
@@ -60,12 +60,12 @@ export default {
         {
           icon: "mdi-television-classic",
           title: "ซีรีส์",
-          to: "/",
+          to: "/series",
         },
         {
           icon: "mdi-movie-open",
           title: "ภาพยนตร์",
-          to: "/movie",
+          to: "/movies",
         },
         {
           icon: "mdi-star-four-points",

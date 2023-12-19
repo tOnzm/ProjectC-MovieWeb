@@ -28,6 +28,7 @@
             :path="item.id"
             :time="item.runtime"
             :alt="item.title"
+            :front="''"
           />
 
           <div class="image-cover">
@@ -40,13 +41,12 @@
 </template>
 
 <script>
-import watchBtn from "../buttons/watchBtn.vue";
 import detailBox from "../detailBox/index";
 import { fetchMovies, getImageUrl, movieYear } from "@/plugins/api";
 
 export default {
   name: "carouselsImage",
-  components: { watchBtn, detailBox },
+  components: { detailBox },
 
   data() {
     return {
@@ -81,8 +81,8 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, #12121200 0%, #121212 100%);
   z-index: 2;
+  border-image: fill 0 linear-gradient(#12121230, #121212);
 }
 .image-cover img {
   height: auto;
@@ -106,7 +106,7 @@ export default {
     left: 0;
     right: 0;
     bottom: -1%;
-    background: linear-gradient(to bottom, #1212122a 0%, #121212 100%);
+    border-image: fill 0 linear-gradient(#12121230, #121212);
     z-index: 1;
   }
 
@@ -142,7 +142,7 @@ export default {
     left: 0;
     right: 0;
     bottom: -1%;
-    background: linear-gradient(to bottom, #1212122a 0%, #121212 100%);
+    border-image: fill 0 linear-gradient(#12121230, #121212);
     z-index: 1;
   }
 
@@ -164,5 +164,4 @@ export default {
     width: 45px;
   }
 }
-
 </style>

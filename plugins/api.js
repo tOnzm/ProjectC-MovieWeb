@@ -20,15 +20,21 @@ export function getLogoUrl(logoPath) {
 export function getStaticLogoUrl() {
     return require('@/static/movieImg/logos/404logo.png');
 }
-
+// ตัดข้อมูลวันที่ให้เหลือแต่ ปี
 export function movieYear(year) {
-    return year.split("-")[0];
+    if (year && year.length > 0) {
+        return year.split("-")[0];
+    } else {
+        return "ไม่พบข้อมูล";
+    }
 }
 
+//แปลงนาที เป็น ชม.+ น.
 export function movieTime(time) {
     const hours = Math.floor(time / 60);
     const min = time % 60;
     return `${hours} ชั่วโมง ${min} นาที`;
+
 }
 
 
@@ -59,7 +65,7 @@ export function genres(genresData) {
         return "ไม่พบข้อมูล";
     }
 }
-
+//ข้อมูลหนัง
 export function overview(overviewData) {
     if (overviewData && overviewData.length > 0) {
         return overviewData
@@ -69,6 +75,7 @@ export function overview(overviewData) {
     }
 }
 
+//เรตติ้งอายุหนัง
 export function certification(certificationData) {
     if (Array.isArray(certificationData) && certificationData.length > 0) {
         const usCertification = certificationData.find(item => item.iso_3166_1 === "US");

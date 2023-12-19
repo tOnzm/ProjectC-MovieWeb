@@ -1,14 +1,14 @@
 <template>
   <div>
-    <NuxtLink :to="`/${path}`" class="thumbnail-main">
+    <NuxtLink :to="`/${front}/${path}`" class="thumbnail-main">
       <div class="thumbnail-movie">
         <img class="align-center" :src="getImageUrl(thumbnailImage)" />
       </div>
       <div class="mx-1 thumbnail-hover">
         <div class="hover-detail">
           <img class="logo-movies" :src="getLogoUrl(moviesLogo)" alt="" />
-          <NuxtLink :to="`/${path}`">
-            <watchBtn
+          <NuxtLink :to="`/${front}/${path}`">
+            <playNowBtn
               :prepend-icon="'mdi-play'"
               :text="'รับชมเดี๋ยวนี้'"
               :color="'#ffffff90'"
@@ -48,11 +48,11 @@ import {
   languages,
   certification,
 } from "@/plugins/api.js";
-import watchBtn from "@/components/buttons/watchBtn";
+import playNowBtn from "@/components/buttons/playNowBtn/index";
 
 export default {
   name: "thumbnail",
-  components: { watchBtn },
+  components: { playNowBtn },
   props: {
     path: Number,
     thumbnailImage: String,
@@ -61,6 +61,7 @@ export default {
     languagesData: Array,
     moviesLogo: String,
     contentRating: null,
+    front: String,
   },
   methods: {
     getImageUrl(path) {

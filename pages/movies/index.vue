@@ -1,8 +1,7 @@
 <template>
   <div>
     <carouselsImage />
-    <studioMenu />
-    <moviesThumbnail :titleText="'มาใหม่'">
+    <moviesThumbnail :titleText="'ภาพยนตร์มาใหม่'">
       <div v-for="item in movies" :key="item.id">
         <thumbnail
           :thumbnailImage="item.poster_path"
@@ -12,7 +11,7 @@
           :languagesData="item.spoken_languages"
           :time="item.runtime"
           :contentRating="item.certification"
-          :front="''"
+          :front="'movies'"
         >
         </thumbnail>
       </div>
@@ -22,11 +21,11 @@
 </template>
 
 <script>
-import carouselsImage from "../components/carouselsImage/index.vue";
-import studioMenu from "../components/studioMenu/index.vue";
-import moviesThumbnail from "../components/moviesThumbnail/index";
-import thumbnail from "../components/moviesThumbnail/thumbnail/index.vue";
-import { fetchMovies } from "../plugins/api.js";
+import carouselsImage from "@/components/carouselsImage/index.vue";
+import studioMenu from "@/components/studioMenu/index.vue";
+import moviesThumbnail from "@/components/moviesThumbnail/index";
+import thumbnail from "@/components/moviesThumbnail/thumbnail/index.vue";
+import { fetchMovies } from "@/plugins/api.js";
 export default {
   name: "IndexPage",
   components: { carouselsImage, moviesThumbnail, thumbnail, studioMenu },
