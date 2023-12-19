@@ -1,6 +1,6 @@
 <template>
   <div class="button-custom">
-    <v-btn block size="x-large" :color="color">
+    <v-btn :block="btnBlock" :size="btnSize" :color="color" >
       <v-icon :color="iconColor">{{ prependIcon }} </v-icon>
       <span :style="{ color: textColor }">{{ text }}</span>
     </v-btn>
@@ -16,6 +16,8 @@ export default {
     color: String,
     iconColor: String,
     textColor: String,
+    btnSize: String,Number,
+    btnBlock: Boolean,
   },
 };
 </script>
@@ -31,7 +33,6 @@ export default {
 }
 .button-custom .v-btn {
   background-color: #ffffff20;
-  padding: 1.5rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -39,6 +40,4 @@ export default {
     padding: 1rem;
   }
 }
-
-
 </style>

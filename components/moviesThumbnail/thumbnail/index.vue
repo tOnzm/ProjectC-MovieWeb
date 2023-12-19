@@ -6,7 +6,6 @@
       </div>
       <div class="mx-1 thumbnail-hover">
         <div class="hover-detail">
-          <!-- เพิ่มเงื่อนไขที่ตรวจสอบว่ามีข้อมูล logos หรือไม่ -->
           <img class="logo-movies" :src="getLogoUrl(moviesLogo)" alt="" />
           <NuxtLink :to="`/${path}`">
             <watchBtn
@@ -15,13 +14,18 @@
               :color="'#ffffff90'"
               :icon-color="'#000'"
               :text-color="'#000'"
+              :btn-size="'small'"
             />
           </NuxtLink>
           <div>
             <div class="detail-text">
-              <p>{{ movieYear(year) }}</p>
+              <h3>{{ languages(languagesData) }}</h3>
               <v-icon>mdi-circle-small</v-icon>
-              <p>{{ movieTime(time) }}</p>
+              <h3>{{ movieTime(time) }}</h3>
+              <v-icon>mdi-circle-small</v-icon>
+              <div class="movie-rating">
+                <h3>{{ certification(contentRating) }}</h3>
+              </div>
             </div>
           </div>
         </div>
@@ -41,6 +45,8 @@ import {
   getLogoUrl,
   movieYear,
   movieTime,
+  languages,
+  certification,
 } from "@/plugins/api.js";
 import watchBtn from "@/components/buttons/watchBtn";
 
@@ -52,8 +58,9 @@ export default {
     thumbnailImage: String,
     backdropImage: String,
     time: Number,
-    year: String,
+    languagesData: Array,
     moviesLogo: String,
+    contentRating: null,
   },
   methods: {
     getImageUrl(path) {
@@ -69,12 +76,25 @@ export default {
     movieTime(time) {
       return movieTime(time);
     },
-    
+    languages(languagesData) {
+      return languages(languagesData);
+    },
+    certification(certificationData) {
+      return certification(certificationData);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.movie-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff20;
+  padding: 2px 10px 2px 10px;
+  border-radius: 5px;
+}
 .hover-detail {
   padding: 1rem;
   position: absolute;
@@ -83,10 +103,14 @@ export default {
   width: 100%;
   white-space: nowrap;
   text-overflow: clip;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo-movies {
   width: 150px !important;
+  margin-bottom: 1rem;
 }
 .backdrop-Image {
   border-radius: 10px;
@@ -94,9 +118,10 @@ export default {
 .detail-text {
   padding-top: 1rem;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  font-weight: 800;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.75rem;
   color: #fff;
 }
 .thumbnail-movie,
@@ -115,6 +140,7 @@ export default {
 .thumbnail-hover img {
   width: 100%;
   object-fit: cover;
+ 
 }
 .thumbnail-movie img {
   width: 100%;

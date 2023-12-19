@@ -19,7 +19,7 @@
           <h4>{{ movieTime(movie.runtime) }}</h4>
           <v-icon>mdi-circle-small</v-icon>
           <div class="movie-rating">
-            <h4>PG-13</h4>
+            <h4>{{ certification(movie.certification) }}</h4>
           </div>
         </div>
         <div class="movie-overview">
@@ -38,6 +38,7 @@
                   :color="'#ffffff'"
                   :icon-color="'#000'"
                   :text-color="'#000'"
+                  :btn-block="true"
                 />
               </NuxtLink>
             </v-col>
@@ -63,6 +64,7 @@ import {
   getLogoUrl,
   languages,
   genres,
+  certification,
 } from "../plugins/api";
 
 export default {
@@ -79,7 +81,10 @@ export default {
       const axios = this.$axios;
       this.movie =
         (await paramsMovies({ axios, params: this.$route.params })) || {};
+        
+
     },
+
     getImageUrl(imagePath) {
       return getImageUrl(imagePath);
     },
@@ -106,6 +111,9 @@ export default {
     },
     genres(genresData) {
       return genres(genresData);
+    },
+    certification(certificationData) {
+      return certification(certificationData);
     },
   },
   mounted() {

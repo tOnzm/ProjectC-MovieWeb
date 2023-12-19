@@ -22,8 +22,8 @@
             :moviesLogo="item.file_path"
             :year="item.release_date"
             :voice="item.spoken_languages"
-            :contentRating="'15+'"
-            :overview="item.overview"
+            :contentRating="item.certification"
+            :overviewData="item.overview"
             :genresData="item.genres"
             :path="item.id"
             :time="item.runtime"
@@ -96,7 +96,7 @@ export default {
 @media screen and(max-width: 600px) {
   .image-cover {
     position: relative;
-    height: 30vh;
+    height: 50vh;
     width: 100%;
   }
   .image-cover::before {
@@ -164,38 +164,5 @@ export default {
     width: 45px;
   }
 }
-@media screen and(max-width: 1264px) {
-  .image-cover {
-    position: relative;
-    height: 30vh;
-    width: 100%;
-  }
-  .image-cover::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 2%;
-    background: linear-gradient(to bottom, #1212122a 0%, #121212 100%);
-    z-index: 1;
-  }
-  .image-cover img {
-    height: auto;
-    width: 100%;
-  }
-  .v-carousel {
-    height: 400px !important;
-  }
 
-  .logo-mobile {
-    display: block;
-    position: absolute;
-    z-index: 999;
-    margin: 1rem;
-  }
-  .logo-mobile img {
-    width: 45px;
-  }
-}
 </style>

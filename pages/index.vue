@@ -9,10 +9,11 @@
           :path="item.id"
           :backdropImage="item.backdrop_path"
           :moviesLogo="item.file_path"
-          :year="item.release_date"
+          :languagesData="item.spoken_languages"
           :time="item.runtime"
+          :contentRating="item.certification"
         >
-      </thumbnail>
+        </thumbnail>
       </div>
     </moviesThumbnail>
     <bottomNav />
@@ -40,7 +41,6 @@ export default {
     async fetchMovies() {
       const axios = this.$axios;
       this.movies = await fetchMovies(axios);
-      
     },
   },
   mounted() {

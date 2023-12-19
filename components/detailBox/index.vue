@@ -11,11 +11,11 @@
         <h3>{{ movieTime(time) }}</h3>
         <v-icon>mdi-circle-small</v-icon>
         <div class="movie-rating">
-          <h3>{{ contentRating }}</h3>
+          <h3>{{ certification(contentRating) }}</h3>
         </div>
       </div>
       <div class="movie-overview">
-        <h4>{{ overview }}</h4>
+        <h4>{{ overview(overviewData) }}</h4>
       </div>
       <div class="movie-genres">
         <h4>{{ genres(genresData) }}</h4>
@@ -31,6 +31,8 @@
               :color="'#ffffff'"
               :icon-color="'#000'"
               :text-color="'#000'"
+              :btn-size="'x-large'"
+              :btn-block="true"
             />
           </NuxtLink>
         </v-col>
@@ -50,6 +52,8 @@ import {
   getLogoUrl,
   genres,
   languages,
+  overview,
+  certification,
 } from "@/plugins/api";
 
 export default {
@@ -57,10 +61,10 @@ export default {
   components: { watchBtn },
   props: {
     year: String,
-    voice: String,
-    contentRating: String,
-    overview: String,
-    genresData: { String, Number },
+    voice: null,
+    contentRating: null,
+    overviewData: String,
+    genresData: null,
     moviesLogo: String,
     path: Number,
     time: Number,
@@ -82,12 +86,18 @@ export default {
     movieTime(time) {
       return movieTime(time);
     },
-    genres(genresData){
-      return genres(genresData)
+    genres(genresData) {
+      return genres(genresData);
     },
-    languages(languagesData){
+    languages(languagesData) {
       return languages(languagesData);
     },
+    overview(overviewData) {
+      return overview(overviewData);
+    },
+    certification(certificationData){
+      return certification(certificationData);
+    }
   },
 };
 </script>
@@ -108,18 +118,21 @@ export default {
   width: 500px;
   height: 180px;
   object-fit: scale-down;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .movie-detail {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 50px;
+  height: 40px;
+  font-size: 1rem;
 }
 .movie-rating {
   display: flex;
   align-items: center;
+  justify-content: center;
+ 
   background-color: #ffffff20;
   padding: 2px 10px 2px 10px;
   border-radius: 5px;
@@ -131,13 +144,14 @@ export default {
   -webkit-box-orient: vertical;
   color: #ffffff90;
   font-weight: 400;
+  height: 70px;
 }
 .movie-genres {
   display: flex;
   align-items: center;
   column-gap: 0.75rem;
   font-size: 1rem;
-  height: 50px;
+  height: 40px;
 }
 
 @media screen and(max-width: 600px) {
@@ -157,15 +171,16 @@ export default {
     align-items: center;
   }
   .movie-logo {
-    max-width: 80%;
-    height: 150px;
+    max-width: 100%;
+    width: 250px;
+    height: 100px;
     object-fit: scale-down;
   }
   .movie-detail {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
+    height: 30px;
     font-size: 0.8rem;
   }
   .movie-overview {
@@ -237,16 +252,16 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
+    height: 40px;
     font-size: 0.8rem;
   }
   .movie-overview {
-    display: none;
+    width: 500px;
+    height: 100px;
+    text-align: center;
   }
   .movie-genres {
     display: none;
   }
 }
-
-
 </style>

@@ -93,9 +93,7 @@ export default {
     justify-content: space-around;
     align-items: center;
     height: auto;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem;
   }
 }
 @media screen and(max-width: 960px) {
@@ -122,8 +120,8 @@ export default {
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
+    height: 150px;
   }
-
   .studio-menu-box,
   .studio-menu-box img {
     border-radius: 0.5rem;

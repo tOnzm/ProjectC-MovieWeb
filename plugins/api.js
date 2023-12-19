@@ -30,12 +30,7 @@ export function movieTime(time) {
     const min = time % 60;
     return `${hours} ชั่วโมง ${min} นาที`;
 }
-export function getGenresNames(genres) {
-    return genres.map((genre, index) => {
-        const separator = index !== genres.length - 1 ? ' \u007c ' : '';
-        return `${genre.name}${separator}`;
-    }).join('');
-}
+
 
 //ภาษา
 export function languages(languagesData) {
@@ -65,6 +60,37 @@ export function genres(genresData) {
     }
 }
 
+export function overview(overviewData) {
+    if (overviewData && overviewData.length > 0) {
+        return overviewData
+    }
+    else {
+        return 'ไม่พบข้อมูล';
+    }
+}
+
+export function certification(certificationData) {
+    if (Array.isArray(certificationData) && certificationData.length > 0) {
+        const usCertification = certificationData.find(item => item.iso_3166_1 === "US");
+
+        if (usCertification && usCertification.release_dates && usCertification.release_dates.length > 0) {
+            const movieCertifications = usCertification.release_dates.map(({ certification }) => certification);
+
+            if (movieCertifications[0] !== "") {
+                return movieCertifications[0];
+            } else if (movieCertifications[1] !== "") {
+                return movieCertifications[1];
+            } else {
+                return 'null';
+            }
+        } else {
+            return "null";
+        }
+    } else {
+        return "null";
+    }
+}
+
 
 
 export async function fetchMovies(axios) {
@@ -78,6 +104,11 @@ export async function fetchMovies(axios) {
             const movieDetailsResponse = await axios.$get(
                 `https://api.themoviedb.org/3/movie/${movieId}?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=th`
             );
+            const movieCerResponse = await axios.$get(
+                `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=en`
+            );
+            const movieCertification = movieCerResponse.results;
+
             const movieImagesResponse = await axios.$get(
                 `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=en`
             );
@@ -87,6 +118,7 @@ export async function fetchMovies(axios) {
                 ...movie,
                 ...movieDetailsResponse,
                 ...moviesLogos,
+                certification: movieCertification,
             };
 
             console.log(mergedMovie);
