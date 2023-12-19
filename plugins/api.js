@@ -1,10 +1,10 @@
 // รูปภาพ
 export function getImageUrl(imagePath) {
     const baseImageUrl = "https://image.tmdb.org/t/p/original";
-    if (imagePath && imagePath.length > 0)
+    if (imagePath && imagePath !== "")
         return `${baseImageUrl}${imagePath}`;
     else {
-        return require('@/static/movieImg/logos/404logo.png');
+        return require('@/static/movieImg/404/16-9.png');
     }
 }
 
@@ -97,6 +97,22 @@ export function certification(certificationData) {
         return "null";
     }
 }
+
+//เรตติ้งอายุซีรีส์
+export function certificationSeries(certificationData) {
+    if (Array.isArray(certificationData) && certificationData.length > 0) {
+        const usCertification = certificationData.find(item => item.iso_3166_1 === "US");
+
+        if (usCertification && typeof usCertification.rating === "string" && usCertification.rating.trim() !== "") {
+            return usCertification.rating.trim();
+        } else {
+            return 'null';
+        }
+    } else {
+        return "null";
+    }
+}
+
 
 
 

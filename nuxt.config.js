@@ -2,6 +2,10 @@ import colors from 'vuetify/es5/util/colors'
 
 
 export default {
+
+  env: {
+    TMDB_API_KEY: process.env.TMDB_API_KEY || 'http://localhost:3000'
+  },
  
   
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -68,4 +72,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
+
+  
 }

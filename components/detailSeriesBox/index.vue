@@ -8,10 +8,13 @@
         <v-icon>mdi-circle-small</v-icon>
         <h3>{{ languages(voice) }}</h3>
         <v-icon>mdi-circle-small</v-icon>
-        <h3>{{ movieTime(time) }}</h3>
+        <div class="season-episord">
+          <h3>{{ season }} ซีซั่น</h3>
+          <h3>{{ episord }} ตอน</h3>
+        </div>
         <v-icon>mdi-circle-small</v-icon>
         <div class="movie-rating">
-          <h3>{{ certification(contentRating) }}</h3>
+          <h3>{{ certificationSeries(contentRating) }}</h3>
         </div>
       </div>
       <div class="movie-overview">
@@ -36,7 +39,7 @@
             />
           </NuxtLink>
         </v-col>
-        <v-col cols="1" md="2"><playNowBtn :prepend-icon="'mdi-plus'"  /></v-col>
+        <v-col cols="1" md="2"><playNowBtn :prepend-icon="'mdi-plus'" /></v-col>
       </v-row>
     </div>
   </div>
@@ -52,16 +55,18 @@ import {
   genres,
   languages,
   overview,
-  certification,
+  certificationSeries,
 } from "@/plugins/api";
 
 export default {
-  name: "DetailBox",
+  name: "DetailSeriesBox",
   components: { playNowBtn },
   props: {
+    season : Number,
+    episord: Number,
     year: String,
     voice: null,
-    contentRating: null,
+    contentRating: Array,
     overviewData: String,
     genresData: null,
     moviesLogo: String,
@@ -93,14 +98,18 @@ export default {
     overview(overviewData) {
       return overview(overviewData);
     },
-    certification(certificationData) {
-      return certification(certificationData);
+    certificationSeries(certificationData) {
+      return certificationSeries(certificationData);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.season-episord {
+  display: flex;
+  gap: 5px;
+}
 .detail-box {
   width: 500px;
   height: 500px;

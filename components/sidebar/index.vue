@@ -70,7 +70,7 @@ export default {
         {
           icon: "mdi-star-four-points",
           title: "ออริจินัล",
-          to: "/",
+          to: "/original",
         },
       ],
       miniVariant: true,

@@ -21,5 +21,5 @@ export async function paramsMovies({ axios, params }) {
         certification: movieCertification,
     };
     console.log(mergedMovie);
-    return mergedMovie;
+    return mergedMovie
 } 

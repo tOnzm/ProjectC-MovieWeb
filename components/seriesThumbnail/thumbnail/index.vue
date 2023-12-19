@@ -21,10 +21,13 @@
             <div class="detail-text">
               <h3>{{ languages(languagesData) }}</h3>
               <v-icon>mdi-circle-small</v-icon>
-              <h3>{{ movieTime(time) }}</h3>
+              <div class="season-episord">
+                <h3>{{ season }} ซีซั่น</h3>
+                <h3>{{ episord }} ตอน</h3>
+              </div>
               <v-icon>mdi-circle-small</v-icon>
               <div class="movie-rating">
-                <h3>{{ certification(contentRating) }}</h3>
+                <h3>{{ certificationSeries(contentRating) }}</h3>
               </div>
             </div>
           </div>
@@ -46,7 +49,7 @@ import {
   movieYear,
   movieTime,
   languages,
-  certification,
+  certificationSeries,
 } from "@/plugins/api.js";
 import playNowBtn from "@/components/buttons/playNowBtn/index";
 
@@ -57,7 +60,8 @@ export default {
     path: Number,
     thumbnailImage: String,
     backdropImage: String,
-    time: Number,
+    episord: Number,
+    season: Number,
     languagesData: Array,
     moviesLogo: String,
     contentRating: null,
@@ -80,14 +84,18 @@ export default {
     languages(languagesData) {
       return languages(languagesData);
     },
-    certification(certificationData) {
-      return certification(certificationData);
+    certificationSeries(certificationData) {
+      return certificationSeries(certificationData);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.season-episord{
+display: flex;
+gap: 5px;
+}
 .movie-rating {
   display: flex;
   align-items: center;
@@ -141,7 +149,6 @@ export default {
 .thumbnail-hover img {
   width: 100%;
   object-fit: cover;
- 
 }
 .thumbnail-movie img {
   width: 100%;
