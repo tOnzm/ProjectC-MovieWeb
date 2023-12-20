@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-else>
-        <br>
+        <br />
         <p>ไม่พบผลลัพธ์</p>
       </div>
     </div>
@@ -53,18 +53,21 @@ export default {
 }
 
 .movie-thumbnail {
-  width: 223px;
+  width: 220px;
   height: 300px;
 }
+
 .poster {
   width: 100%;
   height: 100%;
   border-radius: 10px;
   object-fit: cover;
+  transition: 0.5s;
 }
-.movie-list {
-  margin-top: 2rem;
+.poster:hover {
+  scale: 1.1;
 }
+
 .movie {
   margin-top: 1rem;
   display: flex;

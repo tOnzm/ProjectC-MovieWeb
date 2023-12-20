@@ -30,29 +30,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.search {
+  width: 100%;
+  background-color: #2c2c2c;
+  height: 70px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+  padding-inline: 1rem;
+}
+.box {
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 1rem;
+  font-weight: 500;
+  width: 100%;
+  height: 100%;
+}
 .box::placeholder {
   color: #858585;
   font-size: 1.2rem;
   font-weight: 600;
   justify-content: center;
 }
-.search {
-  width: 100%;
-  background-color: #2c2c2c;
-  height: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  padding: 1rem;
-}
-.box {
-  color: #eeeeee;
-  font-size: 1.2rem;
-  padding: 1rem;
-  font-weight: 500;
-  width: 100%;
-  height: 100%;
+
+.box:focus {
+  outline: 0px;
 }
 
 .icon {

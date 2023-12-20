@@ -112,6 +112,17 @@ export function certificationSeries(certificationData) {
         return "null";
     }
 }
+//นักแสดง
+export function castMovie(castData) {
+    if (castData && castData.length > 0) {
+        return castData.map(name => {
+            return `${name.name} เป็นตัวละคร ${name.character}`;
+        });
+    } else {
+        return 'ไม่พบข้อมูล';
+    }
+  
+}
 
 
 
@@ -137,10 +148,15 @@ export async function fetchMovies(axios) {
             );
             const moviesLogos = movieImagesResponse.logos[0];
 
+            const movieCastResponse = await axios.$get(
+                `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=3c79a5d5b0c2bd68652652a202b1c175`
+            );
+
             const mergedMovie = {
                 ...movie,
                 ...movieDetailsResponse,
                 ...moviesLogos,
+                ...movieCastResponse,
                 certification: movieCertification,
             };
 

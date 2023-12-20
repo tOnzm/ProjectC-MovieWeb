@@ -134,6 +134,7 @@ export default {
   backdrop-filter: blur(5px);
   max-width: 100px;
   min-width: 50px;
+  height: 25px;
   padding: 2px 8px 2px 8px;
   border-radius: 5px;
 }

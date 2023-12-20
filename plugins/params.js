@@ -14,10 +14,15 @@ export async function paramsMovies({ axios, params }) {
     );
     // ตัดเอาแค่ข้อมูลจาก logos => array 0
     const moviesLogos = movieImagesResponse.logos[0];
+
+    const movieCastResponse = await axios.$get(
+        `https://api.themoviedb.org/3/movie/${params.id}/credits?api_key=3c79a5d5b0c2bd68652652a202b1c175`
+    );
     // รวมข้อมูล
     const mergedMovie = {
         ...movieDetailsResponse,
         ...moviesLogos,
+        ...movieCastResponse,
         certification: movieCertification,
     };
     console.log(mergedMovie);

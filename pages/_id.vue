@@ -8,6 +8,19 @@
       <div class="image-cover">
         <img :src="getImageUrl(movie.backdrop_path)" :alt="movie.title" />
       </div>
+
+      <div class="cast">
+        <h1>นักแสดงนำ</h1>
+        <div class="cast-loop">
+          <div class="profile" v-for="(cast, index) in movie.cast" :key="cast.id" v-if="index < 10">
+            <img :src="getImageUrl(cast.profile_path)" alt="" />
+            
+            <h4>{{ cast.name }}</h4>
+            <span>{{ cast.character }}</span>
+          </div>
+        </div>
+      </div>
+
       <detailBox
         :moviesLogo="movie.file_path"
         :year="movie.release_date"
@@ -24,13 +37,14 @@
 </template>
 
 <script>
+import cast from "../components/cast/index.vue";
 import detailBox from "../components/detailBox/index.vue";
 import { paramsMovies } from "../plugins/params";
-import { getImageUrl, getLogoUrl } from "../plugins/api";
+import { getImageUrl, getLogoUrl, castMovie } from "../plugins/api";
 
 export default {
   name: "moviePage",
-  components: {detailBox },
+  components: { detailBox, cast },
 
   data() {
     return {
@@ -49,6 +63,9 @@ export default {
     },
     getLogoUrl(imagePath) {
       return getLogoUrl(imagePath);
+    },
+    castMovie(castData) {
+      return castMovie(castData);
     },
   },
   mounted() {
@@ -70,7 +87,7 @@ export default {
   right: 0;
   bottom: 0;
   background: linear-gradient(to bottom, #12121200 0%, #121212 100%);
-  z-index: 2;
+  z-index: 0;
 }
 .image-cover img {
   height: 100vh;
@@ -129,6 +146,56 @@ export default {
   font-size: 1rem;
   height: 50px;
 }
+
+.cast {
+  z-index: 998;
+  position: absolute;
+  top: 70%;
+  left: 10%;
+  display: flex;  
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 80%;
+}
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+
+  
+}
+.cast-loop{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+ 
+
+}
+.profile > img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #eeeeee;
+
+}
+.profile > h4 {
+  padding-top: 1rem;
+  text-align: center;
+}
+.profile > span {
+  font-size: calc(0.2rem + 1vh);
+  text-align: center;
+  color: #858585;
+}
+
+
 
 @media screen and(max-width: 600px) {
   .image-cover {
