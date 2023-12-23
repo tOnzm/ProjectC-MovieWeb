@@ -16,6 +16,9 @@ export default {
 * {
   text-decoration: none;
 }
+body{
+  background-color: #121212;
+}
 .v-overlay{
   display: none;
 }

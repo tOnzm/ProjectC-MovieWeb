@@ -12,9 +12,14 @@
       <div class="cast">
         <h1>นักแสดงนำ</h1>
         <div class="cast-loop">
-          <div class="profile" v-for="(cast, index) in movie.cast" :key="cast.id" v-if="index < 10">
+          <div
+            class="profile"
+            v-for="(cast, index) in movie.cast"
+            :key="cast.id"
+            v-if="index < 10"
+          >
             <img :src="getImageUrl(cast.profile_path)" alt="" />
-            
+
             <h4>{{ cast.name }}</h4>
             <span>{{ cast.character }}</span>
           </div>
@@ -78,19 +83,20 @@ export default {
 .image-cover {
   height: 100vh;
   width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 .image-cover::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, #12121200 0%, #121212 100%);
-  z-index: 0;
+  left: 0;
+  background: linear-gradient(#00000000, #121212);
 }
 .image-cover img {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   object-fit: cover;
 }
@@ -148,34 +154,23 @@ export default {
 }
 
 .cast {
-  z-index: 998;
-  position: absolute;
-  top: 70%;
-  left: 10%;
-  display: flex;  
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 80%;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  position: relative;
 }
 .profile {
   display: flex;
+  max-width: 180px;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  max-height: 200px;
   margin: 1rem;
-
-  
+  align-items: center;
 }
-.cast-loop{
+.cast-loop {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  
- 
-
 }
 .profile > img {
   width: 100px;
@@ -183,7 +178,6 @@ export default {
   object-fit: cover;
   border-radius: 50%;
   border: 4px solid #eeeeee;
-
 }
 .profile > h4 {
   padding-top: 1rem;
@@ -194,8 +188,6 @@ export default {
   text-align: center;
   color: #858585;
 }
-
-
 
 @media screen and(max-width: 600px) {
   .image-cover {
