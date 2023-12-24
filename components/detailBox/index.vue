@@ -1,15 +1,17 @@
 <template>
   <div class="detail-box" flat>
     <img class="movie-logo" :src="getLogoUrl(moviesLogo)" :alt="{ alt }" />
-
     <div>
       <div class="movie-detail">
+        <v-icon class="detail-icons">mdi-calendar</v-icon>
         <h3>{{ movieYear(year) }}</h3>
-        <v-icon>mdi-circle-small</v-icon>
+        <v-icon class="icon-dot">mdi-circle-small</v-icon>
+        <v-icon class="detail-icons">mdi-volume-high</v-icon>
         <h3>{{ languages(voice) }}</h3>
-        <v-icon>mdi-circle-small</v-icon>
+        <v-icon class="icon-dot">mdi-circle-small</v-icon>
+        <v-icon class="detail-icons">mdi-timer</v-icon>
         <h3>{{ movieTime(time) }}</h3>
-        <v-icon>mdi-circle-small</v-icon>
+        <v-icon class="icon-dot">mdi-circle-small</v-icon>
         <div class="movie-rating">
           <h3>{{ certification(contentRating) }}</h3>
         </div>
@@ -36,7 +38,7 @@
             />
           </NuxtLink>
         </v-col>
-        <v-col cols="1" md="2"><playNowBtn :prepend-icon="'mdi-plus'"  /></v-col>
+        <v-col cols="1" md="2"><playNowBtn :prepend-icon="'mdi-plus'" /></v-col>
       </v-row>
     </div>
   </div>
@@ -134,9 +136,11 @@ export default {
   backdrop-filter: blur(5px);
   max-width: 100px;
   min-width: 50px;
-  height: 25px;
-  padding: 2px 8px 2px 8px;
+  height: 30px;
   border-radius: 5px;
+}
+.movie-rating h3 {
+  padding: 8px;
 }
 .movie-overview h4 {
   overflow: hidden;
@@ -153,6 +157,27 @@ export default {
   column-gap: 0.75rem;
   font-size: 1rem;
   height: 40px;
+  font-weight: 400;
+}
+
+.detail-icons {
+  color: #d8d8d8;
+  font-size: 1rem;
+  padding-right: 0.5rem;
+}
+.icon-dot {
+  color: #d8d8d8;
+  font-size: 1rem;
+}
+.watchPovider {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: column;
+}
+
+.streaming {
+  width: 50px;
+  border-radius: 10%;
 }
 
 @media screen and(max-width: 600px) {

@@ -36,6 +36,7 @@
         :path="movie.id"
         :time="movie.runtime"
         :alt="movie.title"
+       
       />
     </div>
   </div>
