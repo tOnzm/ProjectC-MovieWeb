@@ -67,7 +67,7 @@ export default {
     overviewData: String,
     genresData: null,
     moviesLogo: String,
-    path: Number,
+    path: null,
     time: Number,
     alt: String,
     front: String,

@@ -33,10 +33,10 @@
         :contentRating="movie.certification"
         :overviewData="movie.overview"
         :genresData="movie.genres"
-        :path="movie.id"
+        :front="''"
+        :path="'watch'"
         :time="movie.runtime"
         :alt="movie.title"
-       
       />
     </div>
   </div>
