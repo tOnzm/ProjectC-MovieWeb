@@ -43,8 +43,8 @@
 
 <script>
 import detailSeriesBox from "../detailSeriesBox/index";
-import { fetchSeries } from "@/plugins/series";
-import { getImageUrl} from "@/plugins/api";
+import { fetchSeries } from "@/api/series";
+import { getImageUrl} from "@/api/api";
 
 export default {
   name: "carouselsSeriesImage",

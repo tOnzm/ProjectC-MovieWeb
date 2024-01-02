@@ -55,7 +55,7 @@ import {
   languages,
   overview,
   certification,
-} from "@/plugins/api";
+} from "@/api/api";
 
 export default {
   name: "DetailBox",
@@ -105,11 +105,11 @@ export default {
 <style lang="scss" scoped>
 .detail-box {
   width: 500px;
-  height: 500px;
+  height: 100%;
   margin: 1rem;
   padding: 1rem;
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 10%;
   background: transparent;
   z-index: 999;

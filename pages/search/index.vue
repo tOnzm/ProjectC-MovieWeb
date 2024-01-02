@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/plugins/api.js";
+import { getImageUrl } from "@/api/api.js";
 import SearchBox from "@/components/searchBox/index";
-import { searchMovie } from "@/plugins/search.js";
+import { searchMovie } from "@/api/search.js";
 
 export default {
   name: "SearchPage",

@@ -47,7 +47,7 @@ import {
   movieTime,
   languages,
   certification,
-} from "@/plugins/api.js";
+} from "@/api/api.js";
 import playNowBtn from "@/components/buttons/playNowBtn/index";
 
 export default {

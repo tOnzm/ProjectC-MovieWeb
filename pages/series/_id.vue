@@ -26,8 +26,8 @@
 
 <script>
 import detailSeriesBox from "@/components/detailSeriesBox/index.vue";
-import { paramsSeries } from "@/plugins/series";
-import { getImageUrl, getLogoUrl } from "@/plugins/api";
+import { paramsSeries } from "@/api/series";
+import { getImageUrl, getLogoUrl } from "@/api/api";
 
 export default {
   name: "moviePage",

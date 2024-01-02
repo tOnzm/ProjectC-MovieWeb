@@ -26,7 +26,7 @@ import carouselsSeriesImage from "@/components/carouselsSeriesImage/index.vue";
 import studioMenu from "@/components/studioMenu/index.vue";
 import seriesThumbnail from "@/components/seriesThumbnail/index";
 import thumbnail from "@/components/seriesThumbnail/thumbnail/index.vue";
-import { fetchSeries, paramsSeries } from "@/plugins/series.js";
+import { fetchSeries, paramsSeries } from "@/api/series.js";
 export default {
   name: "IndexPage",
   components: { carouselsSeriesImage, seriesThumbnail, thumbnail, studioMenu },

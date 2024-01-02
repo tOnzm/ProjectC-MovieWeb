@@ -1,3 +1,5 @@
+
+
 // รูปภาพ
 export function getImageUrl(imagePath) {
     const baseImageUrl = "https://image.tmdb.org/t/p/original";
@@ -127,7 +129,7 @@ export function castMovie(castData) {
 
 
 
-export async function fetchMovies(axios) {
+export async function Movies(axios) {
     const nowPlayingResponse = await axios.$get(
         "https://api.themoviedb.org/3/movie/now_playing?api_key=3c79a5d5b0c2bd68652652a202b1c175&language=th"
     );

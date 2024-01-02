@@ -42,7 +42,7 @@
 
 <script>
 import detailBox from "../detailBox/index";
-import { fetchMovies, getImageUrl, movieYear } from "@/plugins/api";
+import { Movies, getImageUrl, movieYear } from "@/api/api";
 
 export default {
   name: "carouselsImage",
@@ -58,13 +58,13 @@ export default {
     getImageUrl(imagePath) {
       return getImageUrl(imagePath);
     },
-    async fetchMovies() {
-      const axios = this.$axios;
-      this.movies = await fetchMovies(axios);
+    async Movies() {
+      const data = this.$axios;
+      this.movies = await Movies(data);
     },
   },
   mounted() {
-    this.fetchMovies();
+    this.Movies();
   },
 };
 </script>
@@ -83,9 +83,10 @@ export default {
   bottom: 0;
   z-index: 2;
   border-image: fill 0 linear-gradient(#12121230, #121212);
+  
 }
 .image-cover img {
-  height: auto;
+  height: 100%;
   width: 100%;
   object-fit: cover;
 }

@@ -25,7 +25,7 @@ import carouselsImage from "@/components/carouselsImage/index.vue";
 import studioMenu from "@/components/studioMenu/index.vue";
 import moviesThumbnail from "@/components/moviesThumbnail/index";
 import thumbnail from "@/components/moviesThumbnail/thumbnail/index.vue";
-import { fetchMovies } from "@/plugins/api.js";
+import { fetchMovies } from "@/api/api.js";
 export default {
   name: "IndexPage",
   components: { carouselsImage, moviesThumbnail, thumbnail, studioMenu },

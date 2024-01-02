@@ -26,10 +26,10 @@ import carouselsImage from "../components/carouselsImage/index.vue";
 import studioMenu from "../components/studioMenu/index.vue";
 import moviesThumbnail from "../components/moviesThumbnail/index";
 import thumbnail from "../components/moviesThumbnail/thumbnail/index.vue";
-import { fetchMovies } from "../plugins/api.js";
+import { Movies } from "../api/api.js";
 export default {
   name: "IndexPage",
-  components: { carouselsImage, moviesThumbnail, thumbnail, studioMenu },
+  components: { carouselsImage, moviesThumbnail, thumbnail, studioMenu },  
   head: {
     title: " หน้าแรก",
   },
@@ -39,13 +39,13 @@ export default {
     };
   },
   methods: {
-    async fetchMovies() {
+    async Movies() {
       const axios = this.$axios;
-      this.movies = await fetchMovies(axios);
+      this.movies = await Movies(axios);
     },
   },
   mounted() {
-    this.fetchMovies();
+    this.Movies();
   },
 };
 </script>

@@ -56,7 +56,7 @@ import {
   languages,
   overview,
   certificationSeries,
-} from "@/plugins/api";
+} from "@/api/api";
 
 export default {
   name: "DetailSeriesBox",

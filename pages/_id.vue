@@ -45,8 +45,8 @@
 <script>
 import cast from "../components/cast/index.vue";
 import detailBox from "../components/detailBox/index.vue";
-import { paramsMovies } from "../plugins/params";
-import { getImageUrl, getLogoUrl, castMovie } from "../plugins/api";
+import { paramsMovies } from "../api/params";
+import { getImageUrl, getLogoUrl, castMovie } from "../api/api";
 
 export default {
   name: "moviePage",

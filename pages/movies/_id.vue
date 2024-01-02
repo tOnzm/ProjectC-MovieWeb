@@ -25,8 +25,8 @@
 
 <script>
 import detailBox from "@/components/detailBox/index.vue";
-import { paramsMovies } from "@/plugins/params";
-import { getImageUrl, getLogoUrl } from "@/plugins/api";
+import { paramsMovies } from "@/api/params";
+import { getImageUrl, getLogoUrl } from "@/api/api";
 
 export default {
   name: "moviePage",
