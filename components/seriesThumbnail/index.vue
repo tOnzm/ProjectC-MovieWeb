@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <div class="slide-group-title">
       <h1>{{ titleText }}</h1>
       <viewMoreBtn :path="'nowshowing'" />
@@ -50,8 +50,9 @@ export default {
 }
 
 @media screen and(max-width: 600px) {
+  
   .slide-group-title {
-    margin: 0.75rem 0rem 0rem 0.75rem;
+    margin: 5.5rem 0rem 0rem 0.75rem;
   }
   .slide-group-title h1 {
     font-size: 1rem;
@@ -68,7 +69,7 @@ export default {
 }
 @media screen and(max-width: 960px) {
   .slide-group-title {
-    margin: 0.75rem 0rem 0rem 0.75rem;
+    margin: 1rem 0rem 0rem 0.75rem;
   }
   .slide-group-title h1 {
     font-size: 1rem;
@@ -86,23 +87,5 @@ export default {
   }
 }
 
-@media screen and(max-width: 1264px) {
-  .slide-group-title {
-    margin: 0.75rem 0rem 0rem 0.75rem;
-  }
-  .slide-group-title h1 {
-    font-size: 1rem;
-    margin-left: 0;
-  }
 
-  .v-slide-group__next {
-    display: none;
-  }
-  .v-slide-group__prev {
-    display: none;
-  }
-  .v-slide-group {
-    margin-left: 0vw;
-  }
-}
 </style>

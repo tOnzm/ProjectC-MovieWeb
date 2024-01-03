@@ -25,7 +25,7 @@ import carouselsImage from "@/components/carouselsImage/index.vue";
 import studioMenu from "@/components/studioMenu/index.vue";
 import moviesThumbnail from "@/components/moviesThumbnail/index";
 import thumbnail from "@/components/moviesThumbnail/thumbnail/index.vue";
-import { fetchMovies } from "@/api/api.js";
+import { Movies } from "@/api/api.js";
 export default {
   name: "IndexPage",
   components: { carouselsImage, moviesThumbnail, thumbnail, studioMenu },
@@ -38,13 +38,13 @@ export default {
     };
   },
   methods: {
-    async fetchMovies() {
-      const axios = this.$axios;
-      this.movies = await fetchMovies(axios);
+    async Movies() {
+      const data = this.$axios;
+      this.movies = await Movies(data);
     },
   },
   mounted() {
-    this.fetchMovies();
+    this.Movies();
   },
 };
 </script>

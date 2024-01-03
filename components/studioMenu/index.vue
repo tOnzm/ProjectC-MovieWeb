@@ -88,11 +88,11 @@ export default {
 
 //Responsive
 @media screen and(max-width: 600px) {
-  .studio-menu {
+ .studio-menu {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: auto;
+    height: 100px;
     margin: 1rem;
   }
 }
@@ -101,7 +101,7 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: auto;
+    height: 150px;
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
@@ -112,19 +112,5 @@ export default {
     border-radius: 0.5rem;
   }
 }
-@media screen and(max-width: 1264px) {
-  .studio-menu {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    height: 150px;
-  }
-  .studio-menu-box,
-  .studio-menu-box img {
-    border-radius: 0.5rem;
-  }
-}
+
 </style>

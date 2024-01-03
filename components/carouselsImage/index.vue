@@ -7,16 +7,17 @@
     <div>
       <v-carousel
         class="carousel-image"
-        height="70vh"
-        hide-delimiters
+        height="100vh"
         cycle
         show-arrows-on-hover
         :show-arrows="false"
+        hide-delimiter-background
       >
         <v-carousel-item
           class="carousel-item"
-          v-for="item in movies"
+          v-for="(item, index) in movies"
           :key="item.id"
+          v-if="index <= 4"
         >
           <detailBox
             :moviesLogo="item.file_path"
@@ -71,8 +72,15 @@ export default {
 
 <style lang="scss" scoped>
 .image-cover {
-  height: 100vh;
   width: 100%;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.v-carousel {
+  height: 80vh !important;
 }
 .image-cover::before {
   content: "";
@@ -80,20 +88,17 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 20%;
   z-index: 2;
-  border-image: fill 0 linear-gradient(#12121230, #121212);
-  
+  border-image: fill 0 linear-gradient(#12121218, #121212);
 }
-.image-cover img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
 .logo-mobile {
   display: none;
 }
+::v-deep .v-carousel__controls {
+  display: flex;
+}
+
 @media screen and(max-width: 600px) {
   .image-cover {
     position: relative;
@@ -111,12 +116,12 @@ export default {
     z-index: 1;
   }
 
+  .v-carousel {
+    height: 40vh !important;
+  }
   .image-cover img {
     height: 30vh;
     width: 100%;
-  }
-  .v-carousel {
-    height: 350px !important;
   }
 
   .logo-mobile {
@@ -128,6 +133,9 @@ export default {
   .logo-mobile img {
     width: 45px;
   }
+}
+::v-deep .v-carousel__controls {
+  display: none;
 }
 
 @media screen and(max-width: 960px) {
@@ -152,7 +160,7 @@ export default {
     width: 100%;
   }
   .v-carousel {
-    height: 350px !important;
+    height: 40vh !important;
   }
 
   .logo-mobile {

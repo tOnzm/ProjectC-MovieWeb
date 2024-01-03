@@ -1,6 +1,8 @@
 <template>
   <div class="detail-box" flat>
-    <img class="movie-logo" :src="getLogoUrl(moviesLogo)" :alt="{ alt }" />
+    <div class="logoBox">
+      <img class="movie-logo" :src="getLogoUrl(moviesLogo)" :alt="{ alt }" />
+    </div>
     <div>
       <div class="movie-detail">
         <v-icon class="detail-icons">mdi-calendar</v-icon>
@@ -25,7 +27,7 @@
     </div>
     <div>
       <v-row dense>
-        <v-col cols="9" md="10">
+        <v-col cols="8" md="10">
           <NuxtLink :to="`${front}/${path}`">
             <playNowBtn
               :prepend-icon="'mdi-play'"
@@ -33,12 +35,15 @@
               :color="'#ffffff'"
               :icon-color="'#000'"
               :text-color="'#000'"
-              :btn-size="'x-large'"
+              :btnSize="'x-large'"
               :btn-block="true"
+              :btnLarge="true"
             />
           </NuxtLink>
         </v-col>
-        <v-col cols="1" md="2"><playNowBtn :prepend-icon="'mdi-plus'" /></v-col>
+        <v-col cols="1" md="2"
+          ><playNowBtn :prepend-icon="'mdi-plus'" :btnLarge="true"
+        /></v-col>
       </v-row>
     </div>
   </div>
@@ -107,87 +112,82 @@ export default {
   width: 500px;
   height: 100%;
   margin: 1rem;
-  padding: 1rem;
   position: absolute;
-  top: 10%;
+  top: 5%;
   left: 10%;
   background: transparent;
   z-index: 999;
 }
-.movie-logo {
+//โลโก้
+.logoBox {
   width: 100%;
-  object-fit: contain;
-  align-items: center;
-  aspect-ratio: 2/1;
+  .movie-logo {
+    width: fit-content;
+    object-fit: contain;
+    aspect-ratio: 16/9;
+  }
 }
-
+//ข้อมูลทั่วไป
 .movie-detail {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  height: 40px;
-  font-size: 1rem;
+  h3 {
+    font-size: 1.2rem;
+  }
+  .detail-icons {
+    color: #d8d8d8;
+    font-size: 1rem;
+    padding-right: 0.5rem;
+  }
+  .icon-dot {
+    color: #d8d8d8;
+    font-size: 1rem;
+  }
 }
+//เรทอายุ
 .movie-rating {
   display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: #fff2;
   backdrop-filter: blur(5px);
   max-width: 100px;
-  min-width: 50px;
-  height: 30px;
+  padding: 2px 8px;
   border-radius: 5px;
+  h3 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+  }
 }
-.movie-rating h3 {
-  padding: 8px;
+
+//เรื่องย่อ
+.movie-overview {
+  margin: 0.5rem 0;
+  h4 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    color: #ffffff90;
+    font-weight: 400;
+  }
 }
-.movie-overview h4 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  color: #ffffff90;
-  font-weight: 400;
-  height: 70px;
-}
+//ประเภท
 .movie-genres {
-  display: flex;
-  align-items: center;
-  column-gap: 0.75rem;
-  font-size: 1rem;
-  height: 40px;
-  font-weight: 400;
-}
-
-.detail-icons {
-  color: #d8d8d8;
-  font-size: 1rem;
-  padding-right: 0.5rem;
-}
-.icon-dot {
-  color: #d8d8d8;
-  font-size: 1rem;
-}
-.watchPovider {
-  display: flex;
-  margin-top: 1rem;
-  flex-direction: column;
-}
-
-.streaming {
-  width: 50px;
-  border-radius: 10%;
+  margin: 0.75rem 0;
+  h4 {
+    font-size: 1rem;
+    font-weight: 500;
+  }
 }
 
 @media screen and(max-width: 600px) {
   .detail-box {
     width: 100%;
-    height: 250px;
+    height: 50px;
     margin: 0rem;
     padding: 0rem;
     position: absolute;
-    top: 10%;
+    top: 0%;
     left: 0%;
     background: transparent;
     z-index: 999;
@@ -196,18 +196,33 @@ export default {
     flex-direction: column;
     align-items: center;
   }
-  .movie-logo {
-    max-width: 100%;
-    width: 250px;
-    height: 100px;
-    object-fit: scale-down;
-  }
-  .movie-detail {
+  //โลโก้ res 600px
+  .logoBox {
+    width: 100%;
     display: flex;
     justify-content: center;
+    .movie-logo {
+      width: fit-content;
+      object-fit: contain;
+      aspect-ratio: 16/9;
+    }
+  } 
+  //ข้อมูลทั่วไป
+  .movie-detail {
+    display: flex;
     align-items: center;
-    height: 30px;
-    font-size: 0.8rem;
+    h3 {
+      font-size: 0.75rem;
+    }
+    .detail-icons {
+      color: #d8d8d8;
+      font-size: 1rem;
+      padding-right: 0.5rem;
+    }
+    .icon-dot {
+      color: #d8d8d8;
+      font-size: 1rem;
+    }
   }
   .movie-overview {
     display: none;
@@ -233,17 +248,33 @@ export default {
     flex-direction: column;
     align-items: center;
   }
-  .movie-logo {
-    max-width: 80%;
-    height: 150px;
-    object-fit: scale-down;
-  }
-  .movie-detail {
+//โลโก้ res 960px
+.logoBox {
+    width: 100%;
     display: flex;
     justify-content: center;
+    .movie-logo {
+      width: fit-content;
+      object-fit: contain;
+      aspect-ratio: 16/9;
+    }
+  } 
+  //ข้อมูลทั่วไป
+  .movie-detail {
+    display: flex;
     align-items: center;
-    height: 50px;
-    font-size: 0.8rem;
+    h3 {
+      font-size: 1rem;
+    }
+    .detail-icons {
+      color: #d8d8d8;
+      font-size: 1rem;
+      padding-right: 0.5rem;
+    }
+    .icon-dot {
+      color: #d8d8d8;
+      font-size: 1rem;
+    }
   }
   .movie-overview {
     display: none;
