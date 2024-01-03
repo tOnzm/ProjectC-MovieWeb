@@ -162,7 +162,6 @@ export async function Movies(axios) {
                 certification: movieCertification,
             };
 
-            console.log(mergedMovie);
             return mergedMovie;
         }
     );
