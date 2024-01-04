@@ -3,7 +3,7 @@
 <h3 align="center">Mr.Thammarat Noongoen</h3>
 
 ## User Interface 
-### Image 01
+### Example 
 ![App_UI](./example.png)
 
 
