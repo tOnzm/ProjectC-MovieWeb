@@ -1,16 +1,14 @@
-import movieApi from './movieApi';
+import movieApi from './movie_config';
 
-const topRatedMovies = async () => {
+async function topRatedMovies() {
   try {
     const response = await movieApi.get ('/top_rated');
     const movieData = await Promise.all (
-      response.data.results.map (async movie => {
+      response.data.results.map (async function (movie){
         const movieId = movie.id;
         const fullData = await movieApi.get (`/${movieId}`);
         const imageData = await movieApi.get (`/${movieId}/images`);
-        const releaseDateData = await movieApi.get (
-          `/${movieId}/release_dates`
-        );
+        const releaseDateData = await movieApi.get (`/${movieId}/release_dates`);
         const castData = await movieApi.get (`/${movieId}/credits`);
 
         const mergedMovie = {
@@ -27,7 +25,7 @@ const topRatedMovies = async () => {
 
     return movieData;
   } catch (error) {
-    console.error (error);
+    console.error ('topRated',error);
   }
 };
 

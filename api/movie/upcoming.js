@@ -1,16 +1,14 @@
-import movieApi from './movieApi';
+import movieApi from './movie_config';
 
-const upcomingMovies = async () => {
+async function upcomingMovies() {
   try {
     const response = await movieApi.get ('/upcoming');
     const movieData = await Promise.all (
-      response.data.results.map (async movie => {
+      response.data.results.map (async function (movie){
         const movieId = movie.id;
         const fullData = await movieApi.get (`/${movieId}`);
         const imageData = await movieApi.get (`/${movieId}/images`);
-        const releaseDateData = await movieApi.get (
-          `/${movieId}/release_dates`
-        );
+        const releaseDateData = await movieApi.get (`/${movieId}/release_dates`);
         const castData = await movieApi.get (`/${movieId}/credits`);
 
         const mergedMovie = {
@@ -27,7 +25,7 @@ const upcomingMovies = async () => {
 
     return movieData;
   } catch (error) {
-    console.error (error);
+    console.error ('upComing',error);
   }
 };
 

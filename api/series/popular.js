@@ -1,8 +1,10 @@
-import movieApi from './movie_config';
+//หน้ายอดนิยม
 
-async function nowPlayingMovies () {
+import movieApi from './_series_config';
+
+async function popularMovies () {
   try {
-    const response = await movieApi.get ('/now_playing');
+    const response = await movieApi.get ('/popular');
     const movieData = await Promise.all (
       response.data.results.map (async function (movie) {
         const movieId = movie.id;
@@ -10,8 +12,7 @@ async function nowPlayingMovies () {
         const imageData = await movieApi.get (`/${movieId}/images`);
         const releaseDateData = await movieApi.get (`/${movieId}/release_dates`);
         const castData = await movieApi.get (`/${movieId}/credits`);
-        
-        //รวมข้อมูล
+
         const mergedMovie = {
           ...(movie || []),
           ...(fullData.data || []),
@@ -23,10 +24,11 @@ async function nowPlayingMovies () {
         return mergedMovie;
       })
     );
+
     return movieData;
   } catch (error) {
-    console.error ('nowPlaying ',error);
+    console.error ('popular',error);
   }
 }
 
-export default nowPlayingMovies;
+export default popularMovies;

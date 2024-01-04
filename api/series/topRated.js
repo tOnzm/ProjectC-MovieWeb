@@ -1,17 +1,16 @@
-import movieApi from './movie_config';
+import movieApi from './_series_config';
 
-async function nowPlayingMovies () {
+async function topRatedMovies() {
   try {
-    const response = await movieApi.get ('/now_playing');
+    const response = await movieApi.get ('/top_rated');
     const movieData = await Promise.all (
-      response.data.results.map (async function (movie) {
+      response.data.results.map (async function (movie){
         const movieId = movie.id;
         const fullData = await movieApi.get (`/${movieId}`);
         const imageData = await movieApi.get (`/${movieId}/images`);
         const releaseDateData = await movieApi.get (`/${movieId}/release_dates`);
         const castData = await movieApi.get (`/${movieId}/credits`);
-        
-        //รวมข้อมูล
+
         const mergedMovie = {
           ...(movie || []),
           ...(fullData.data || []),
@@ -23,10 +22,11 @@ async function nowPlayingMovies () {
         return mergedMovie;
       })
     );
+
     return movieData;
   } catch (error) {
-    console.error ('nowPlaying ',error);
+    console.error ('topRated',error);
   }
-}
+};
 
-export default nowPlayingMovies;
+export default topRatedMovies;
