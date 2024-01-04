@@ -1,5 +1,5 @@
 # Project MovieWab  
-<h5 align="center">for study and learning</h5>
+<h5 align="center">For study and learning</h5>
 
 <h5 align="center">Created by</h5>
 <h3 align="center">Mr.Thammarat Noongoen</h3>
