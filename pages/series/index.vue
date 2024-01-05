@@ -3,18 +3,34 @@
     <carouselsSeriesImage />
     <seriesThumbnail :titleText="'ออริจินัล'">
       <div v-for="item in airingTodayTVData" :key="item.id">
-        <thumbnail
-          :thumbnailImage="item.poster_path"
-          :path="item.id"
-          :backdropImage="item.backdrop_path"
-          :moviesLogo="item.file_path"
-          :languagesData="item.spoken_languages"
-          :episord="item.number_of_episodes"
-          :season="item.number_of_seasons"
-          :contentRating="item.certification"
-          :front="'series'"
+        <NuxtLink
+          :to="{
+            name: 'series-id',
+            params: {
+              id: item.id,
+              logo: item.file_path,
+              season: item.number_of_seasons,
+              backdrop: item.backdrop_path,
+              languagesData: item.spoken_languages,
+              episord:item.number_of_episodes,
+              genresData: item.genres,
+              year: item.first_air_date,
+              contentRating: item.certification,
+              overviewData: item.overview
+            },
+          }"
         >
-        </thumbnail>
+          <thumbnail
+            :thumbnailImage="item.poster_path"
+            :backdropImage="item.backdrop_path"
+            :moviesLogo="item.file_path"
+            :languagesData="item.spoken_languages"
+            :episord="item.number_of_episodes"
+            :season="item.number_of_seasons"
+            :contentRating="item.certification"
+          >
+          </thumbnail>
+        </NuxtLink>
       </div>
     </seriesThumbnail>
     <bottomNav />

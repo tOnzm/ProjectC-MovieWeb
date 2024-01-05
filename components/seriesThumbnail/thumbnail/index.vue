@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NuxtLink :to="`${front}/${path}`" class="thumbnail-main">
+    <div  class="thumbnail-main">
       <div class="thumbnail-movie">
         <img class="align-center" :src="getImageUrl(thumbnailImage)" />
       </div>
@@ -38,7 +38,7 @@
           :src="getImageUrl(backdropImage)"
         />
       </div>
-    </NuxtLink>
+    </div>
   </div>
 </template>
 

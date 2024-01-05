@@ -10,7 +10,6 @@ async function airingTodayTV () {
         const imageData = await seriesApi.get (`/${seriesID}/images`);
         const releaseDateData = await seriesApi.get (`/${seriesID}/content_ratings`);
         // const castData = await seriesApi.get (`/${seriesID}/credits`);
-        console.log(imageData.data.logos[0],"series")
         //รวมข้อมูล
         const mergedSeries = {
           ...(series || []),

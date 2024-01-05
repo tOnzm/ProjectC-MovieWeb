@@ -6,19 +6,18 @@
     </div>
     <div>
       <div class="image-cover">
-        <img :src="getImageUrl(series.backdrop_path)" :alt="series.title" />
+        <img :src="getImageUrl($route.params.backdrop)" alt="" />
       </div>
       <detailSeriesBox
-        :moviesLogo="series.file_path"
-        :year="series.first_air_date"
-        :voice="series.spoken_languages"
-        :contentRating="series.certification"
-        :overviewData="series.overview"
-        :genresData="series.genres"
-        :path="series.id"
-        :episord="series.number_of_episodes"
-        :season="series.number_of_seasons"
-        :alt="series.title"
+        :moviesLogo="$route.params.logo"
+        :voice="$route.params.languagesData"
+        :season="$route.params.season"
+        :episord="$route.params.episord"
+        :path="$route.params.id"
+        :genresData="$route.params.genresData"
+        :year="$route.params.year"
+        :contentRating="$route.params.contentRating"
+        :overviewData="$route.params.overviewData"
       />
     </div>
   </div>
@@ -26,8 +25,8 @@
 
 <script>
 import detailSeriesBox from "@/components/detailSeriesBox/index.vue";
-import { paramsSeries } from "@/api/series";
 import { getImageUrl, getLogoUrl } from "@/api/api";
+import airingTodayTV from "@/api/series/airingToday.js";
 
 export default {
   name: "moviePage",
@@ -35,16 +34,10 @@ export default {
 
   data() {
     return {
-      series: [],
+      yourData: [],
     };
   },
   methods: {
-    async paramsSeries() {
-      const axios = this.$axios;
-      this.series =
-        (await paramsSeries({ axios, params: this.$route.params })) || {};
-    },
-
     getImageUrl(imagePath) {
       return getImageUrl(imagePath);
     },
@@ -52,8 +45,38 @@ export default {
       return getLogoUrl(imagePath);
     },
   },
-  mounted() {
-    this.paramsSeries();
+  async mounted() {
+    const {
+      id,
+      logo,
+      backdrop_path,
+      number_of_seasons,
+      spoken_languages,
+      number_of_episodes,
+      genresData,
+      year,
+      contentRating,
+      overviewData,
+    } = this.$route.params;
+
+    try {
+      const seriesData = await airingTodayTV(
+        id,
+        logo,
+        backdrop_path,
+        number_of_seasons,
+        spoken_languages,
+        number_of_episodes,
+        genresData,
+        year,
+        contentRating,
+        overviewData
+      );
+
+      this.yourData = seriesData;
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 </script>
