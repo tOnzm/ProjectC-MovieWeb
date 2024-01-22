@@ -2,7 +2,7 @@
 
 import movieApi from './movie_config';
 
-async function popularMovies () {
+/* async function popularMovies () {
   try {
     const response = await movieApi.get ('/popular');
     const movieData = await Promise.all (
@@ -29,6 +29,10 @@ async function popularMovies () {
   } catch (error) {
     console.error ('popular',error);
   }
-}
+} */
 
-export default popularMovies;
+export default class popular extends movieApi {
+  static async getAll () {
+    return await this.api.get ('/popular', {}).then (({data}) => data);
+  }
+}

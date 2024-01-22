@@ -1,19 +1,24 @@
 import axios from 'axios';
-import config from '../config';
 
 const baseURL = 'https://api.themoviedb.org/3/movie';
-const api_Key = config.tmdb_api_key;
+const key = process.env.TMDB_API_KEY;
 
-const movieApi = axios.create ({
-  baseURL,
-  timeout: 10000,
-});
+function createInstance () {
+  const movieApi = axios.create ({
+    baseURL,
+    timeout: 4000,
+    params: {
+      api_key: key
+    }
+  });
+  return movieApi
+}
 
-//แทรก api กับ ภาษา
+/* //แทรก api กับ ภาษา
 movieApi.interceptors.request.use (
   function (config) {
-    config.params = {
-      ...config.params,
+    key.params = {
+      ...key.params,
       api_key: api_Key,
       language: 'en',
     };
@@ -22,6 +27,9 @@ movieApi.interceptors.request.use (
   function (error) {
     return Promise.reject (error);
   }
-);
+); */
 
-export default movieApi;
+export default class movieApi{
+  static api = createInstance()
+  static key = key
+};

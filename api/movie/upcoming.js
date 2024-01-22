@@ -1,6 +1,6 @@
 import movieApi from './movie_config';
 
-async function upcomingMovies() {
+/* async function upcomingMovies() {
   try {
     const response = await movieApi.get ('/upcoming');
     const movieData = await Promise.all (
@@ -27,6 +27,10 @@ async function upcomingMovies() {
   } catch (error) {
     console.error ('upComing',error);
   }
-};
+}; */
 
-export default upcomingMovies;
+export default class upComing extends movieApi {
+  static async getAll () {
+    return await this.api.get ('/upcoming', {}).then (({data}) => data);
+  }
+}

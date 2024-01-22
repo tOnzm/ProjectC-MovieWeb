@@ -1,6 +1,6 @@
 import movieApi from './movie_config';
 
-async function topRatedMovies() {
+/* async function topRatedMovies() {
   try {
     const response = await movieApi.get ('/top_rated');
     const movieData = await Promise.all (
@@ -27,6 +27,9 @@ async function topRatedMovies() {
   } catch (error) {
     console.error ('topRated',error);
   }
-};
-
-export default topRatedMovies;
+}; */
+export default class topRated extends movieApi {
+  static async getAll () {
+    return await this.api.get ('/top_rated', {}).then (({data}) => data);
+  }
+}
